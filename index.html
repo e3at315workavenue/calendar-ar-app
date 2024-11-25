@@ -4,33 +4,61 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AR Calendar</title>
-  <script src="https://cdn.jsdelivr.net/npm/mind-ar/dist/mindar-face.prod.js"></script>
+
+  <!-- MindAR Scripts and Styles -->
+  <script src="mindar/mindar-viewer.js"></script>
+  <link rel="stylesheet" href="mindar/mindar-viewer.css">
+
+  <!-- Custom Styles -->
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<nav class="hamburger-menu">
-  <button id="menu-toggle">☰</button>
-  <div id="menu" class="menu-hidden">
-    <ul>
-      <li><button id="toggle-loop">Toggle Video Loop</button></li>
-      <li><button id="toggle-record">Start/Stop Recording</button></li>
-      <li>
-        <label for="volume">Volume:</label>
-        <input type="range" id="volume" min="60" max="80" value="60" step="1">
-      </li>
-    </ul>
+  <!-- Loader Screen -->
+  <div id="loader">
+    <div id="spinner"></div>
+    <p>Loading AR Experience...</p>
   </div>
-</nav>
 
-  <div id="mindar-container">
-    <div id="overlay-container">
-      <video id="ar-video" muted loop></video>
-      <div id="logos">
-        <img src="assets/logo1.png" class="logo" alt="Logo 1">
-        <img src="assets/logo2.png" class="logo" alt="Logo 2">
-        <img src="assets/logo3.png" class="logo" alt="Logo 3">
-        <img src="assets/logo4.png" class="logo" alt="Logo 4">
-      </div>
+  <!-- Hamburger Menu -->
+  <nav class="hamburger-menu">
+    <button id="menu-toggle">☰</button>
+    <div id="menu" class="menu-hidden">
+      <ul>
+        <li><button id="toggle-loop">Toggle Video Loop</button></li>
+        <li><button id="toggle-record">Start/Stop Recording</button></li>
+        <li>
+          <label for="volume">Volume:</label>
+          <input type="range" id="volume" min="0" max="100" value="60" step="1">
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- AR Container -->
+  <div id="ar-container">
+    <a-scene mindar-image embedded color-space="sRGB">
+      <a-assets>
+        <video id="video-january" src="assets/January.mp4" autoplay loop></video>
+        <video id="video-february" src="assets/February.mp4" autoplay loop></video>
+        <!-- Add other months -->
+      </a-assets>
+
+      <!-- Marker Targets -->
+      <mindar-image-target targetIndex="0">
+        <a-video src="#video-january" position="0 0 0" scale="1 1 1"></a-video>
+      </mindar-image-target>
+      <mindar-image-target targetIndex="1">
+        <a-video src="#video-february" position="0 0 0" scale="1 1 1"></a-video>
+      </mindar-image-target>
+      <!-- Add other months -->
+
+      <a-camera position="0 0 0" look-controls="true"></a-camera>
+    </a-scene>
+    <div id="logos">
+      <img src="assets/logo1.png" class="logo" alt="Logo 1">
+      <img src="assets/logo2.png" class="logo" alt="Logo 2">
+      <img src="assets/logo3.png" class="logo" alt="Logo 3">
+      <img src="assets/logo4.png" class="logo" alt="Logo 4">
     </div>
   </div>
 
