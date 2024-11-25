@@ -8,14 +8,19 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="menu">
-    <button id="hamburger-menu">☰</button>
-    <div id="menu-items" class="hidden">
-      <button id="toggle-loop">Loop: ON</button>
-      <button id="start-recording">Start Recording</button>
-      <button id="stop-recording" class="hidden">Stop Recording</button>
-    </div>
+<nav class="hamburger-menu">
+  <button id="menu-toggle">☰</button>
+  <div id="menu" class="menu-hidden">
+    <ul>
+      <li><button id="toggle-loop">Toggle Video Loop</button></li>
+      <li><button id="toggle-record">Start/Stop Recording</button></li>
+      <li>
+        <label for="volume">Volume:</label>
+        <input type="range" id="volume" min="60" max="80" value="60" step="1">
+      </li>
+    </ul>
   </div>
+</nav>
 
   <div id="mindar-container">
     <div id="overlay-container">
