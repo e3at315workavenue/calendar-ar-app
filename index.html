@@ -6,8 +6,8 @@
   <title>AR Calendar</title>
 
   <!-- MindAR Scripts and Styles -->
-  <script src="mindar/mindar-viewer.js"></script>
-  <link rel="stylesheet" href="mindar/mindar-viewer.css">
+  <script src="https://cdn.jsdelivr.net/npm/mind-ar/dist/mindar-viewer.prod.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mind-ar/dist/mindar-viewer.prod.css">
 
   <!-- Custom Styles -->
   <link rel="stylesheet" href="style.css">
@@ -25,7 +25,6 @@
     <div id="menu" class="menu-hidden">
       <ul>
         <li><button id="toggle-loop">Toggle Video Loop</button></li>
-        <li><button id="toggle-record">Start/Stop Recording</button></li>
         <li>
           <label for="volume">Volume:</label>
           <input type="range" id="volume" min="0" max="100" value="60" step="1">
@@ -36,11 +35,11 @@
 
   <!-- AR Container -->
   <div id="ar-container">
-    <a-scene mindar-image embedded color-space="sRGB">
+    <a-scene mindar-image="imageTargetSrc: assets/targets.mind" embedded color-space="sRGB">
       <a-assets>
-        <video id="video-january" src="assets/January.mp4" autoplay loop></video>
-        <video id="video-february" src="assets/February.mp4" autoplay loop></video>
-        <!-- Add other months -->
+        <video id="video-january" src="assets/January.mp4" autoplay loop muted></video>
+        <video id="video-february" src="assets/February.mp4" autoplay loop muted></video>
+        <!-- Add more videos as needed -->
       </a-assets>
 
       <!-- Marker Targets -->
@@ -50,18 +49,21 @@
       <mindar-image-target targetIndex="1">
         <a-video src="#video-february" position="0 0 0" scale="1 1 1"></a-video>
       </mindar-image-target>
-      <!-- Add other months -->
+      <!-- Add more targets as needed -->
 
       <a-camera position="0 0 0" look-controls="true"></a-camera>
     </a-scene>
-    <div id="logos">
-      <img src="assets/logo1.png" class="logo" alt="Logo 1">
-      <img src="assets/logo2.png" class="logo" alt="Logo 2">
-      <img src="assets/logo3.png" class="logo" alt="Logo 3">
-      <img src="assets/logo4.png" class="logo" alt="Logo 4">
-    </div>
   </div>
 
+  <!-- Logos -->
+  <div id="logos">
+    <img src="assets/logo1.png" class="logo" alt="Logo 1">
+    <img src="assets/logo2.png" class="logo" alt="Logo 2">
+    <img src="assets/logo3.png" class="logo" alt="Logo 3">
+    <img src="assets/logo4.png" class="logo" alt="Logo 4">
+  </div>
+
+  <!-- Custom Script -->
   <script src="script.js"></script>
 </body>
 </html>
