@@ -3,106 +3,86 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AR Calendar</title>
+  <title>Calendar WebAR</title>
 
-  <!-- MindAR Scripts and Styles -->
-  <script src="https://cdn.jsdelivr.net/npm/mind-ar/dist/mindar-viewer.prod.js"></script>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mind-ar/dist/mindar-viewer.prod.css">
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=155301097"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', '155301097');
+  </script>
 
-  <!-- Custom Styles -->
+  <!-- External CSS -->
   <link rel="stylesheet" href="style.css">
+
+  <!-- A-Frame and MindAR -->
+  <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
 </head>
 <body>
-  <!-- Loader Screen -->
-  <div id="loader">
-    <div id="spinner"></div>
-    <p>Loading AR Experience...</p>
-  </div>
-
-  <!-- Hamburger Menu -->
-  <nav class="hamburger-menu">
-    <button id="menu-toggle">☰</button>
-    <div id="menu" class="menu-hidden">
-      <ul>
-        <li><button id="toggle-loop">Toggle Video Loop</button></li>
-        <li>
-          <label for="volume">Volume:</label>
-          <input type="range" id="volume" min="0" max="100" value="60" step="1">
-        </li>
-      </ul>
+  <!-- Loader Animation -->
+  <div class="loading">
+    <div class="hourglass">
+      <div class="hourglass-top">
+        <div class="sand-top"></div>
+      </div>
+      <div class="hourglass-bottom">
+        <div class="sand-bottom"></div>
+      </div>
     </div>
-  </nav>
+  </div>
 
   <!-- AR Container -->
   <div id="ar-container">
-    <a-scene mindar-image="imageTargetSrc: assets/targets.mind" embedded color-space="sRGB">
+    <a-scene mindar-image="imageTargetSrc: assets/mindar.json;" color-space="sRGB" 
+             renderer="colorManagement: true, physicallyCorrectLights" 
+             vr-mode-ui="enabled: false" 
+             device-orientation-permission-ui="enabled: false" embedded>
+      
+      <!-- Assets for Video and Audio -->
       <a-assets>
-        <video id="video-january" src="assets/January.mp4" autoplay loop muted></video>
-        <video id="video-february" src="assets/February.mp4" autoplay loop muted></video>
-        <video id="video-march" src="assets/March.mp4" autoplay loop muted></video>
-        <video id="video-april" src="assets/April.mp4" autoplay loop muted></video>
-        <video id="video-may" src="assets/May.mp4" autoplay loop muted></video>
-        <video id="video-june" src="assets/June.mp4" autoplay loop muted></video>
-        <video id="video-july" src="assets/July.mp4" autoplay loop muted></video>
-        <video id="video-august" src="assets/August.mp4" autoplay loop muted></video>
-        <video id="video-september" src="assets/September.mp4" autoplay loop muted></video>
-        <video id="video-october" src="assets/October.mp4" autoplay loop muted></video>
-        <video id="video-november" src="assets/November.mp4" autoplay loop muted></video>
-        <video id="video-december" src="assets/December.mp4" autoplay loop muted></video>
+        <audio id="audio" src="assets/background-audio.mp3" preload="auto"></audio>
+        <video id="video-january" src="assets/January.mp4" autoplay loop></video>
+        <video id="video-february" src="assets/February.mp4" autoplay loop></video>
+        <!-- Add videos for other months -->
       </a-assets>
 
-      <!-- Marker Targets -->
+      <!-- Camera -->
+      <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+
+      <!-- MindAR Targets -->
       <mindar-image-target targetIndex="0">
         <a-video src="#video-january" position="0 0 0" scale="1 1 1"></a-video>
       </mindar-image-target>
       <mindar-image-target targetIndex="1">
         <a-video src="#video-february" position="0 0 0" scale="1 1 1"></a-video>
       </mindar-image-target>
-      <mindar-image-target targetIndex="2">
-      <a-video src="#video-march" position="0 0 0" scale="1 1 1"></a-video>
-      </mindar-image-target>
-      <mindar-image-target targetIndex="3">
-      <a-video src="#video-april" position="0 0 0" scale="1 1 1"></a-video>
-      </mindar-image-target>
-      <mindar-image-target targetIndex="4">
-      <a-video src="#video-may" position="0 0 0" scale="1 1 1"></a-video>
-      </mindar-image-target>
-      <mindar-image-target targetIndex="5">
-      <a-video src="#video-june" position="0 0 0" scale="1 1 1"></a-video>
-      </mindar-image-target>
-      <mindar-image-target targetIndex="6">
-      <a-video src="#video-july" position="0 0 0" scale="1 1 1"></a-video>
-      </mindar-image-target>
-      <mindar-image-target targetIndex="7">
-      <a-video src="#video-august" position="0 0 0" scale="1 1 1"></a-video>
-      </mindar-image-target>
-      <mindar-image-target targetIndex="8">
-      <a-video src="#video-september" position="0 0 0" scale="1 1 1"></a-video>
-      </mindar-image-target>
-      <mindar-image-target targetIndex="9">
-      <a-video src="#video-october" position="0 0 0" scale="1 1 1"></a-video>
-      </mindar-image-target>
-      <mindar-image-target targetIndex="10">
-      <a-video src="#video-november" position="0 0 0" scale="1 1 1"></a-video>
-      </mindar-image-target>
-      <mindar-image-target targetIndex="11">
-      <a-video src="#video-december" position="0 0 0" scale="1 1 1"></a-video>
-      </mindar-image-target>
-
-
-      <a-camera position="0 0 0" look-controls="true"></a-camera>
+      <!-- Add more targets for March to December -->
     </a-scene>
   </div>
 
-  <!-- Logos -->
-  <div id="logos">
-    <img src="assets/logo1.png" class="logo" alt="Logo 1">
-    <img src="assets/logo2.png" class="logo" alt="Logo 2">
-    <img src="assets/logo3.png" class="logo" alt="Logo 3">
-    <img src="assets/logo4.png" class="logo" alt="Logo 4">
-  </div>
+  <!-- JavaScript to hide loader and handle autoplay -->
+  <script>
+    const sceneEl = document.querySelector('a-scene');
+    const loaderEl = document.querySelector('.loading');
+    const audioElement = document.getElementById('audio');
 
-  <!-- Custom Script -->
-  <script src="script.js"></script>
+    // Function to handle audio autoplay
+    function enableSound() {
+      if (audioElement) {
+        audioElement.play().catch((error) => {
+          console.log('Audio autoplay is blocked. User interaction required.');
+        });
+      }
+    }
+
+    // Hide loader and enable sound once scene is loaded
+    sceneEl.addEventListener('loaded', () => {
+      loaderEl.style.display = 'none';
+      enableSound();
+    });
+  </script>
 </body>
 </html>
