@@ -1,88 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Calendar WebAR</title>
-
-  <!-- Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=155301097"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
-    gtag('config', '155301097');
-  </script>
-
-  <!-- External CSS -->
-  <link rel="stylesheet" href="style.css">
-
-  <!-- A-Frame and MindAR -->
-  <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
-</head>
-<body>
-  <!-- Loader Animation -->
-  <div class="loading">
-    <div class="hourglass">
-      <div class="hourglass-top">
-        <div class="sand-top"></div>
-      </div>
-      <div class="hourglass-bottom">
-        <div class="sand-bottom"></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- AR Container -->
-  <div id="ar-container">
-    <a-scene mindar-image="imageTargetSrc: assets/mindar.json;" color-space="sRGB" 
-             renderer="colorManagement: true, physicallyCorrectLights" 
-             vr-mode-ui="enabled: false" 
-             device-orientation-permission-ui="enabled: false" embedded>
-      
-      <!-- Assets for Video and Audio -->
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
+  </head>
+  <body>
+    <a-scene mindar-image="imageTargetSrc:  https://cdn.glitch.global/12017447-b111-4602-a21b-b25ee667a16c/targets.mind?v=1732879978309;" color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
       <a-assets>
-        <audio id="audio" src="assets/background-audio.mp3" preload="auto"></audio>
-        <video id="video-january" src="assets/January.mp4" autoplay loop></video>
-        <video id="video-february" src="assets/February.mp4" autoplay loop></video>
-        <!-- Add videos for other months -->
+        <!-- Preloading the video -->
+        <video id="exampleVideo" src="https://cdn.glitch.global/12017447-b111-4602-a21b-b25ee667a16c/January-video.mp4?v=1732692730579" loop="true" autoplay="true" muted="true" crossorigin="anonymous"></video>
       </a-assets>
 
-      <!-- Camera -->
       <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
 
-      <!-- MindAR Targets -->
-      <mindar-image-target targetIndex="0">
-        <a-video src="#video-january" position="0 0 0" scale="1 1 1"></a-video>
-      </mindar-image-target>
-      <mindar-image-target targetIndex="1">
-        <a-video src="#video-february" position="0 0 0" scale="1 1 1"></a-video>
-      </mindar-image-target>
-      <!-- Add more targets for March to December -->
+      <!-- Displaying the video when the image target is detected -->
+      <a-entity mindar-image-target="targetIndex: 0">
+        <a-video src="https://cdn.glitch.global/12017447-b111-4602-a21b-b25ee667a16c/January-video.mp4?v=1732692730579" position="0 0 0" scale="1 0.5 1"></a-video>
+      </a-entity>
     </a-scene>
-  </div>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const video = document.getElementById('exampleVideo');
+        const videoPlane = document.querySelector('#videoPlane');
 
-  <!-- JavaScript to hide loader and handle autoplay -->
-  <script>
-    const sceneEl = document.querySelector('a-scene');
-    const loaderEl = document.querySelector('.loading');
-    const audioElement = document.getElementById('audio');
-
-    // Function to handle audio autoplay
-    function enableSound() {
-      if (audioElement) {
-        audioElement.play().catch((error) => {
-          console.log('Audio autoplay is blocked. User interaction required.');
+        // Ensure the video starts when the target is detected
+        videoPlane.addEventListener('targetFound', () => {
+          console.log('Target detected! Playing video...');
+          video.play();
         });
-      }
-    }
-
-    // Hide loader and enable sound once scene is loaded
-    sceneEl.addEventListener('loaded', () => {
-      loaderEl.style.display = 'none';
-      enableSound();
-    });
-  </script>
-</body>
+        });
+      });
+    </script>
+  </body>
 </html>
