@@ -4,25 +4,25 @@
     <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
     <style>
-      #playButton {
+      #overlay {
         position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background: #007bff;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        display: flex;
+        align-items: center;
+        justify-content: center;
         color: white;
-        border: none;
-        padding: 10px 20px;
-        font-size: 16px;
-        border-radius: 5px;
-        cursor: pointer;
-        display: block; /* Visible initially */
+        font-size: 18px;
+        z-index: 9999;
       }
     </style>
   </head>
   <body>
-    <!-- Play Button -->
-    <button id="playButton">Start AR</button>
+    <!-- Overlay Message -->
+    <div id="overlay">Tap anywhere to start AR with audio</div>
 
     <a-scene mindar-image="imageTargetSrc: https://cdn.glitch.global/12017447-b111-4602-a21b-b25ee667a16c/march.mind?v=1733043055723;" 
              color-space="sRGB" 
@@ -33,7 +33,7 @@
         <!-- Preloading the video -->
         <video id="exampleVideo" src="https://cdn.glitch.me/12017447-b111-4602-a21b-b25ee667a16c/March-Video.mp4?v=1733043362265" 
                loop="true" 
-               autoplay="false" 
+               autoplay="true" 
                muted="true" 
                crossorigin="anonymous"></video>
       </a-assets>
@@ -52,27 +52,18 @@
     <script>
       document.addEventListener('DOMContentLoaded', () => {
         const video = document.getElementById('exampleVideo');
-        const playButton = document.getElementById('playButton');
-        const videoPlane = document.querySelector('[mindar-image-target]');
+        const overlay = document.getElementById('overlay');
 
-        // User must interact to enable audio playback
-        playButton.addEventListener('click', () => {
+        // Wait for user interaction to unmute video
+        const enableAudio = () => {
           video.muted = false; // Unmute the video
-          video.play(); // Play the video
-          playButton.style.display = 'none'; // Hide the play button
-        });
+          video.play(); // Ensure video is playing
+          overlay.style.display = 'none'; // Hide the overlay
+          document.removeEventListener('click', enableAudio); // Remove the event listener
+        };
 
-        // Play video when the target is found
-        videoPlane.addEventListener('targetFound', () => {
-          console.log('Target detected! Playing video...');
-          video.play();
-        });
-
-        // Pause video when the target is lost
-        videoPlane.addEventListener('targetLost', () => {
-          console.log('Target lost! Pausing video...');
-          video.pause();
-        });
+        // Add a click listener to enable audio
+        document.addEventListener('click', enableAudio);
       });
     </script>
   </body>
