@@ -42,7 +42,7 @@
 
       <!-- Displaying the video when the image target is detected -->
       <a-entity mindar-image-target="targetIndex: 0">
-        <!-- Scale adjusted to make the video larger than the target -->
+        <!-- Scale adjusted to make the video larger -->
         <a-video id="videoPlane" 
                  src="#exampleVideo" 
                  position="0 0 0.01" 
@@ -56,7 +56,7 @@
         const overlay = document.getElementById('overlay');
         const videoPlane = document.querySelector('[mindar-image-target]');
 
-        // Unmute and play video after user interaction
+        // Ensure video plays when user clicks
         const enableAudio = () => {
           video.muted = false; // Unmute the video
           video.play(); // Play the video
@@ -64,7 +64,7 @@
           document.removeEventListener('click', enableAudio); // Remove event listener
         };
 
-        // Add user interaction to enable audio
+        // Add user interaction to start the video
         document.addEventListener('click', enableAudio);
 
         // Play video when target is found
