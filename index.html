@@ -4,23 +4,25 @@
     <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
     <style>
-      #loadingIndicator {
+      #playButton {
         position: absolute;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        background: rgba(0, 0, 0, 0.7);
+        background: #007bff;
         color: white;
+        border: none;
         padding: 10px 20px;
-        border-radius: 5px;
         font-size: 16px;
-        display: none; /* Hidden initially */
+        border-radius: 5px;
+        cursor: pointer;
+        display: block; /* Visible initially */
       }
     </style>
   </head>
   <body>
-    <!-- Loading Indicator -->
-    <div id="loadingIndicator">Loading AR Experience...</div>
+    <!-- Play Button -->
+    <button id="playButton">Start AR</button>
 
     <a-scene mindar-image="imageTargetSrc: https://cdn.glitch.global/12017447-b111-4602-a21b-b25ee667a16c/march.mind?v=1733043055723;" 
              color-space="sRGB" 
@@ -32,7 +34,7 @@
         <video id="exampleVideo" src="https://cdn.glitch.me/12017447-b111-4602-a21b-b25ee667a16c/March-Video.mp4?v=1733043362265" 
                loop="true" 
                autoplay="false" 
-               muted="false" 
+               muted="true" 
                crossorigin="anonymous"></video>
       </a-assets>
 
@@ -50,22 +52,20 @@
     <script>
       document.addEventListener('DOMContentLoaded', () => {
         const video = document.getElementById('exampleVideo');
+        const playButton = document.getElementById('playButton');
         const videoPlane = document.querySelector('[mindar-image-target]');
-        const loadingIndicator = document.getElementById('loadingIndicator');
 
-        // Show loading indicator until the video is ready
-        loadingIndicator.style.display = 'block';
-
-        video.addEventListener('loadeddata', () => {
-          console.log('Video loaded.');
-          loadingIndicator.style.display = 'none'; // Hide the loading indicator
+        // User must interact to enable audio playback
+        playButton.addEventListener('click', () => {
+          video.muted = false; // Unmute the video
+          video.play(); // Play the video
+          playButton.style.display = 'none'; // Hide the play button
         });
 
         // Play video when the target is found
         videoPlane.addEventListener('targetFound', () => {
           console.log('Target detected! Playing video...');
           video.play();
-          loadingIndicator.style.display = 'none'; // Ensure the loading indicator is hidden
         });
 
         // Pause video when the target is lost
