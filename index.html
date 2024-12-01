@@ -5,17 +5,19 @@
     <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
   </head>
   <body>
-    <a-scene mindar-image="imageTargetSrc: https://cdn.glitch.global/12017447-b111-4602-a21b-b25ee667a16c/march.mind?v=1733043055723; filterMinCF: 0.01; filterBeta: 0.1;"
+    <a-scene mindar-image="imageTargetSrc:  https://cdn.glitch.global/12017447-b111-4602-a21b-b25ee667a16c/march.mind?v=1733043055723;" color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
+    <a-scene mindar-image="imageTargetSrc: https://cdn.glitch.global/12017447-b111-4602-a21b-b25ee667a16c/march.mind?v=1733043055723;" 
              color-space="sRGB" 
              renderer="colorManagement: true, physicallyCorrectLights" 
              vr-mode-ui="enabled: false" 
              device-orientation-permission-ui="enabled: false">
       <a-assets>
         <!-- Preloading the video -->
+        <video id="exampleVideo" src="https://cdn.glitch.me/12017447-b111-4602-a21b-b25ee667a16c/March-Video.mp4?v=1733043362265" loop="true" autoplay="true" muted="true" crossorigin="anonymous"></video>
         <video id="exampleVideo" src="https://cdn.glitch.me/12017447-b111-4602-a21b-b25ee667a16c/March-Video.mp4?v=1733043362265" 
                loop="true" 
-               autoplay="false" 
-               muted="true" 
+               autoplay="true" 
+               muted="false" 
                crossorigin="anonymous"></video>
       </a-assets>
 
@@ -23,33 +25,29 @@
 
       <!-- Displaying the video when the image target is detected -->
       <a-entity mindar-image-target="targetIndex: 0">
-        <!-- Reduced video size to 75% of the original -->
+        <a-video src="https://cdn.glitch.me/12017447-b111-4602-a21b-b25ee667a16c/March-Video.mp4?v=1733043362265" position="0 0 0" scale="1 0.5 1"></a-video>
         <a-video id="videoPlane" 
                  src="#exampleVideo" 
-                 position="0 0 0.01" 
-                 width="1.2" height="0.675"></a-video>
+                 position="0 0 0" 
+                 scale="1 0.5 1"></a-video>
       </a-entity>
     </a-scene>
-
     <script>
       document.addEventListener('DOMContentLoaded', () => {
         const video = document.getElementById('exampleVideo');
-        const videoPlane = document.getElementById('videoPlane');
+        const videoPlane = document.querySelector('#videoPlane');
+        const videoPlane = document.querySelector('[mindar-image-target]');
 
-        // Play video and unmute audio when target is found
+        // Ensure the video starts when the target is detected
+        // Play video when the target is found
         videoPlane.addEventListener('targetFound', () => {
           console.log('Target detected! Playing video...');
-          video.muted = false;
           video.play();
         });
-
-        // Pause video and mute audio when target is lost
+        // Pause video when the target is lost
         videoPlane.addEventListener('targetLost', () => {
           console.log('Target lost! Pausing video...');
           video.pause();
-          video.muted = true;
         });
       });
     </script>
-  </body>
-</html>
