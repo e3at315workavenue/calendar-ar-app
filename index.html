@@ -18,14 +18,6 @@
         font-size: 18px;
         z-index: 9999;
       }
-
-      /* Add styles for circular logos */
-      .logo {
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        background-color: rgba(0, 0, 0, 0.5); /* Black with 50% opacity */
-      }
     </style>
   </head>
   <body>
@@ -48,21 +40,12 @@
 
       <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
 
-      <!-- Displaying the video when the image target is detected -->
+      <!-- Displaying the video when the image target is detected, without any scaling -->
       <a-entity mindar-image-target="targetIndex: 0">
         <!-- No scale applied, letting the video maintain its default size -->
         <a-video id="videoPlane" 
                  src="#exampleVideo" 
-                 position="0 0 0.01"
-                 width="1.6" height="0.9"></a-video> <!-- Set width and height to keep aspect ratio -->
-      </a-entity>
-
-      <!-- Floating Circular Logos -->
-      <a-entity id="logos">
-        <a-sphere position="1.5 1 0" radius="0.1" color="black" opacity="0.5" animation="property: position; to: 1.5 1.5 0; dir: alternate; dur: 2000; loop: true;"></a-sphere>
-        <a-sphere position="1.5 0.8 0" radius="0.1" color="black" opacity="0.5" animation="property: position; to: 1.5 1.3 0; dir: alternate; dur: 2000; loop: true;"></a-sphere>
-        <a-sphere position="1.5 0.6 0" radius="0.1" color="black" opacity="0.5" animation="property: position; to: 1.5 1.1 0; dir: alternate; dur: 2000; loop: true;"></a-sphere>
-        <a-sphere position="1.5 0.4 0" radius="0.1" color="black" opacity="0.5" animation="property: position; to: 1.5 0.9 0; dir: alternate; dur: 2000; loop: true;"></a-sphere>
+                 position="0 0 0.01"></a-video> <!-- Removed scale attribute -->
       </a-entity>
     </a-scene>
 
