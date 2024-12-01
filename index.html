@@ -3,27 +3,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
-    <style>
-      #overlay {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.7);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: white;
-        font-size: 18px;
-        z-index: 9999;
-      }
-    </style>
   </head>
   <body>
-    <!-- Overlay Message -->
-    <div id="overlay">Tap anywhere to start AR with audio</div>
-
     <a-scene mindar-image="imageTargetSrc: https://cdn.glitch.global/12017447-b111-4602-a21b-b25ee667a16c/march.mind?v=1733043055723; filterMinCF: 0.01; filterBeta: 0.1;"
              color-space="sRGB" 
              renderer="colorManagement: true, physicallyCorrectLights" 
@@ -33,7 +14,7 @@
         <!-- Preloading the video -->
         <video id="exampleVideo" src="https://cdn.glitch.me/12017447-b111-4602-a21b-b25ee667a16c/March-Video.mp4?v=1733043362265" 
                loop="true" 
-               autoplay="true" 
+               autoplay="false" 
                muted="true" 
                crossorigin="anonymous"></video>
       </a-assets>
@@ -42,43 +23,52 @@
 
       <!-- Displaying the video when the image target is detected -->
       <a-entity mindar-image-target="targetIndex: 0">
-        <!-- Scale adjusted to make the video larger -->
         <a-video id="videoPlane" 
                  src="#exampleVideo" 
-                 position="0 0 0.01" 
-                 scale="2 1.2 1"></a-video>
+                 position="0 0 0.01"></a-video>
       </a-entity>
     </a-scene>
 
     <script>
       document.addEventListener('DOMContentLoaded', () => {
         const video = document.getElementById('exampleVideo');
-        const overlay = document.getElementById('overlay');
-        const videoPlane = document.querySelector('[mindar-image-target]');
+        const videoPlane = document.getElementById('videoPlane');
 
-        // Ensure video plays when user clicks
-        const enableAudio = () => {
-          video.muted = false; // Unmute the video
-          video.play(); // Play the video
-          overlay.style.display = 'none'; // Hide overlay
-          document.removeEventListener('click', enableAudio); // Remove event listener
-        };
+        // Dynamically adjust video size based on screen orientation and aspect ratio
+        function resizeVideo() {
+          const aspectRatio = 16 / 9; // Aspect ratio of the video
+          let width, height;
 
-        // Add user interaction to start the video
-        document.addEventListener('click', enableAudio);
-
-        // Play video when target is found
-        videoPlane.addEventListener('targetFound', () => {
-          console.log('Target detected! Resuming video...');
-          if (video.paused) {
-            video.play(); // Resume video playback
+          if (window.innerWidth < window.innerHeight) {
+            // Portrait Mode
+            width = 0.7; // 70% of the target size
+            height = width / aspectRatio;
+          } else {
+            // Landscape Mode
+            height = 0.7; // 70% of the target size
+            width = height * aspectRatio;
           }
+
+          videoPlane.setAttribute('width', width);
+          videoPlane.setAttribute('height', height);
+        }
+
+        // Resize the video on load and when window is resized
+        window.addEventListener('resize', resizeVideo);
+        resizeVideo();
+
+        // Play video and unmute audio when target is found
+        videoPlane.addEventListener('targetFound', () => {
+          console.log('Target detected! Playing video...');
+          video.muted = false;
+          video.play();
         });
 
-        // Pause video when target is lost
+        // Pause video and mute audio when target is lost
         videoPlane.addEventListener('targetLost', () => {
           console.log('Target lost! Pausing video...');
-          video.pause(); // Pause video playback
+          video.pause();
+          video.muted = true;
         });
       });
     </script>
