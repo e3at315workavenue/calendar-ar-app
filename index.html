@@ -24,7 +24,7 @@
     <!-- Overlay Message -->
     <div id="overlay">Tap anywhere to start AR with audio</div>
 
-    <a-scene mindar-image="imageTargetSrc: https://cdn.glitch.global/12017447-b111-4602-a21b-b25ee667a16c/march.mind?v=1733043055723;" 
+    <a-scene mindar-image="imageTargetSrc: https://cdn.glitch.global/12017447-b111-4602-a21b-b25ee667a16c/march.mind?v=1733043055723; filterMinCF: 0.01; filterBeta: 0.1;"
              color-space="sRGB" 
              renderer="colorManagement: true, physicallyCorrectLights" 
              vr-mode-ui="enabled: false" 
@@ -44,8 +44,8 @@
       <a-entity mindar-image-target="targetIndex: 0">
         <a-video id="videoPlane" 
                  src="#exampleVideo" 
-                 position="0 0 0" 
-                 scale="1 0.5 1"></a-video>
+                 position="0 0 0.01" 
+                 scale="0.8 0.4 0.4"></a-video>
       </a-entity>
     </a-scene>
 
