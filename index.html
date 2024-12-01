@@ -24,7 +24,7 @@
         width: 50px;
         height: 50px;
         border-radius: 50%;
-        background-color: #ff0000; /* Change this to your logo's color or background */
+        background-color: rgba(0, 0, 0, 0.5); /* Black with 50% opacity */
       }
     </style>
   </head>
@@ -53,15 +53,16 @@
         <!-- No scale applied, letting the video maintain its default size -->
         <a-video id="videoPlane" 
                  src="#exampleVideo" 
-                 position="0 0 0.01"></a-video> <!-- Removed scale attribute -->
+                 position="0 0 0.01"
+                 width="1.6" height="0.9"></a-video> <!-- Set width and height to keep aspect ratio -->
       </a-entity>
 
       <!-- Floating Circular Logos -->
       <a-entity id="logos">
-        <a-sphere position="1.5 1 0" radius="0.1" color="#FF5733" animation="property: position; to: 1.5 1.5 0; dir: alternate; dur: 2000; loop: true;"></a-sphere>
-        <a-sphere position="1.5 0.8 0" radius="0.1" color="#33FF57" animation="property: position; to: 1.5 1.3 0; dir: alternate; dur: 2000; loop: true;"></a-sphere>
-        <a-sphere position="1.5 0.6 0" radius="0.1" color="#3357FF" animation="property: position; to: 1.5 1.1 0; dir: alternate; dur: 2000; loop: true;"></a-sphere>
-        <a-sphere position="1.5 0.4 0" radius="0.1" color="#FFD700" animation="property: position; to: 1.5 0.9 0; dir: alternate; dur: 2000; loop: true;"></a-sphere>
+        <a-sphere position="1.5 1 0" radius="0.1" color="black" opacity="0.5" animation="property: position; to: 1.5 1.5 0; dir: alternate; dur: 2000; loop: true;"></a-sphere>
+        <a-sphere position="1.5 0.8 0" radius="0.1" color="black" opacity="0.5" animation="property: position; to: 1.5 1.3 0; dir: alternate; dur: 2000; loop: true;"></a-sphere>
+        <a-sphere position="1.5 0.6 0" radius="0.1" color="black" opacity="0.5" animation="property: position; to: 1.5 1.1 0; dir: alternate; dur: 2000; loop: true;"></a-sphere>
+        <a-sphere position="1.5 0.4 0" radius="0.1" color="black" opacity="0.5" animation="property: position; to: 1.5 0.9 0; dir: alternate; dur: 2000; loop: true;"></a-sphere>
       </a-entity>
     </a-scene>
 
