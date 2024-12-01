@@ -55,27 +55,29 @@
         const overlay = document.getElementById('overlay');
         const videoPlane = document.querySelector('[mindar-image-target]');
 
-        // Wait for user interaction to unmute video
+        // Unmute and play video after user interaction
         const enableAudio = () => {
           video.muted = false; // Unmute the video
-          video.play(); // Ensure video is playing
-          overlay.style.display = 'none'; // Hide the overlay
-          document.removeEventListener('click', enableAudio); // Remove the event listener
+          video.play(); // Play the video
+          overlay.style.display = 'none'; // Hide overlay
+          document.removeEventListener('click', enableAudio); // Remove event listener
         };
 
-        // Add a click listener to enable audio
+        // Add user interaction to enable audio
         document.addEventListener('click', enableAudio);
 
-        // Play video when the target is found
+        // Play video when target is found
         videoPlane.addEventListener('targetFound', () => {
-          console.log('Target detected! Playing video...');
-          video.play();
+          console.log('Target detected! Resuming video...');
+          if (video.paused) {
+            video.play(); // Resume video playback
+          }
         });
 
-        // Pause video when the target is lost
+        // Pause video when target is lost
         videoPlane.addEventListener('targetLost', () => {
           console.log('Target lost! Pausing video...');
-          video.pause(); // Stops video playback, including audio
+          video.pause(); // Pause video playback
         });
       });
     </script>
