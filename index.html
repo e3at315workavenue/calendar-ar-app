@@ -23,9 +23,11 @@
 
       <!-- Displaying the video when the image target is detected -->
       <a-entity mindar-image-target="targetIndex: 0">
+        <!-- Reduced video size to 75% of the original -->
         <a-video id="videoPlane" 
                  src="#exampleVideo" 
-                 position="0 0 0.01"></a-video>
+                 position="0 0 0.01" 
+                 width="1.2" height="0.675"></a-video>
       </a-entity>
     </a-scene>
 
@@ -33,29 +35,6 @@
       document.addEventListener('DOMContentLoaded', () => {
         const video = document.getElementById('exampleVideo');
         const videoPlane = document.getElementById('videoPlane');
-
-        // Dynamically adjust video size based on screen orientation and aspect ratio
-        function resizeVideo() {
-          const aspectRatio = 16 / 9; // Aspect ratio of the video
-          let width, height;
-
-          if (window.innerWidth < window.innerHeight) {
-            // Portrait Mode
-            width = 0.7; // 70% of the target size
-            height = width / aspectRatio;
-          } else {
-            // Landscape Mode
-            height = 0.7; // 70% of the target size
-            width = height * aspectRatio;
-          }
-
-          videoPlane.setAttribute('width', width);
-          videoPlane.setAttribute('height', height);
-        }
-
-        // Resize the video on load and when window is resized
-        window.addEventListener('resize', resizeVideo);
-        resizeVideo();
 
         // Play video and unmute audio when target is found
         videoPlane.addEventListener('targetFound', () => {
