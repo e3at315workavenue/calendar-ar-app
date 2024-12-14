@@ -3,84 +3,101 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
-    <style>
-      #overlay {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.7);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: white;
-        font-size: 18px;
-        z-index: 9999;
-      }
-    </style>
   </head>
   <body>
-    <!-- Overlay Message -->
-    <div id="overlay">Tap anywhere to start AR with audio</div>
-
-    <a-scene mindar-image="imageTargetSrc: https://cdn.glitch.global/12017447-b111-4602-a21b-b25ee667a16c/march.mind?v=1733043055723; filterMinCF: 0.01; filterBeta: 0.1;"
-             color-space="sRGB" 
-             renderer="colorManagement: true, physicallyCorrectLights" 
-             vr-mode-ui="enabled: false" 
-             device-orientation-permission-ui="enabled: false">
+    <a-scene mindar-image="imageTargetSrc: https://cdn.glitch.global/47cb3597-937e-4975-9047-af4b82a887a7/targets%20(3).mind?v=1734189826382;" color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
       <a-assets>
-        <!-- Preloading the video -->
-        <video id="exampleVideo" src="https://cdn.glitch.me/12017447-b111-4602-a21b-b25ee667a16c/March-Video.mp4?v=1733043362265" 
-               loop="true" 
-               autoplay="true" 
-               muted="true" 
-               crossorigin="anonymous"></video>
+        <!-- Preloading video assets -->
+        <video id="0" src="https://cdn.glitch.me/47cb3597-937e-4975-9047-af4b82a887a7/0.mp4?v=1734186904210" loop muted crossorigin="anonymous"></video>
+        <video id="1" src="https://cdn.glitch.me/47cb3597-937e-4975-9047-af4b82a887a7/1.mp4?v=1734186961809" loop muted crossorigin="anonymous"></video>
+        <video id="2" src="https://cdn.glitch.me/47cb3597-937e-4975-9047-af4b82a887a7/2.mp4?v=1734186961809" loop muted crossorigin="anonymous"></video>
+        <video id="3" src="https://cdn.glitch.me/47cb3597-937e-4975-9047-af4b82a887a7/3.mp4?v=1734186961809" loop muted crossorigin="anonymous"></video>
+        <video id="4" src="https://cdn.glitch.me/47cb3597-937e-4975-9047-af4b82a887a7/4.mp4?v=1734186961809" loop muted crossorigin="anonymous"></video>
+        <video id="5" src="https://cdn.glitch.me/47cb3597-937e-4975-9047-af4b82a887a7/5.mp4?v=1734186961809" loop muted crossorigin="anonymous"></video>
+        <video id="6" src="https://cdn.glitch.me/47cb3597-937e-4975-9047-af4b82a887a7/6.mp4?v=1734186961809" loop muted crossorigin="anonymous"></video>
+        <video id="7" src="https://cdn.glitch.me/47cb3597-937e-4975-9047-af4b82a887a7/7.mp4?v=1734186961809" loop muted crossorigin="anonymous"></video>
+        <video id="8" src="https://cdn.glitch.me/47cb3597-937e-4975-9047-af4b82a887a7/8.mp4?v=1734186961809" loop muted crossorigin="anonymous"></video>
+        <video id="9" src="https://cdn.glitch.me/47cb3597-937e-4975-9047-af4b82a887a7/9.mp4?v=1734186961809" loop muted crossorigin="anonymous"></video>
+        <video id="10" src="https://cdn.glitch.me/47cb3597-937e-4975-9047-af4b82a887a7/10.mp4?v=1734186961809" loop muted crossorigin="anonymous"></video>
+        <video id="11" src="https://cdn.glitch.me/47cb3597-937e-4975-9047-af4b82a887a7/11.mp4?v=1734186961809" loop muted crossorigin="anonymous"></video>
+        
+        <!-- Add more videos as needed -->
+
+        <!-- Preloading images -->
+        <img id="icon1" src="https://cdn.glitch.global/47cb3597-937e-4975-9047-af4b82a887a7/logo-placeholder-image-6-1024x1024.png?v=1734184300693" />
+        <img id="icon2" src="https://cdn.glitch.global/47cb3597-937e-4975-9047-af4b82a887a7/logo-placeholder-image-6-1024x1024.png?v=1734184300693" />
       </a-assets>
 
       <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
 
-      <!-- Displaying the video when the image target is detected -->
-      <a-entity mindar-image-target="targetIndex: 0">
-        <!-- Scale adjusted to match the target's size -->
-        <a-video id="videoPlane" 
-                 src="#exampleVideo" 
-                 position="0 0 0.01" 
-                 scale="1 0.5 1"></a-video> <!-- Scale is set to match target size -->
-      </a-entity>
+      <!-- Define video entities dynamically -->
+    <a-entity mindar-image-target="targetIndex: 0">
+  <a-video src="#0" position="0 0 0" scale="1 0.5 1" rotation="0 0 0"></a-video>
+</a-entity>
+<a-entity mindar-image-target="targetIndex: 1">
+  <a-video src="#1" position="0 0 0" scale="1 0.5 1" rotation="0 0 0"></a-video>
+</a-entity>
+<a-entity mindar-image-target="targetIndex: 2">
+  <a-video src="#2" position="0 0 0" scale="1 0.5 1" rotation="0 0 0"></a-video>
+</a-entity>
+<a-entity mindar-image-target="targetIndex: 3">
+  <a-video src="#3" position="0 0 0" scale="1 0.5 1" rotation="0 0 0"></a-video>
+</a-entity>
+<a-entity mindar-image-target="targetIndex: 4">
+  <a-video src="#4" position="0 0 0" scale="1 0.5 1" rotation="0 0 0"></a-video>
+</a-entity>
+<a-entity mindar-image-target="targetIndex: 5">
+  <a-video src="#5" position="0 0 0" scale="1 0.5 1" rotation="0 0 0"></a-video>
+</a-entity>
+<a-entity mindar-image-target="targetIndex: 6">
+  <a-video src="#6" position="0 0 0" scale="1 0.5 1" rotation="0 0 0"></a-video>
+</a-entity>
+<a-entity mindar-image-target="targetIndex: 7">
+  <a-video src="#7" position="0 0 0" scale="1 0.5 1" rotation="0 0 0"></a-video>
+</a-entity>
+<a-entity mindar-image-target="targetIndex: 8">
+  <a-video src="#8" position="0 0 0" scale="1 0.5 1" rotation="0 0 0"></a-video>
+</a-entity>
+<a-entity mindar-image-target="targetIndex: 9">
+  <a-video src="#9" position="0 0 0" scale="1 0.5 1" rotation="0 0 0"></a-video>
+</a-entity>
+<a-entity mindar-image-target="targetIndex: 10">
+  <a-video src="#10" position="0 0 0" scale="1 0.5 1" rotation="0 0 0"></a-video>
+</a-entity>
+<a-entity mindar-image-target="targetIndex: 11">
+  <a-video src="#11" position="0 0 0" scale="1 0.5 1" rotation="0 0 0"></a-video>
+</a-entity>
+
+      <script>
+        document.addEventListener('DOMContentLoaded', () => {
+          const videos = Array.from({ length: 12 }, (_, i) => document.getElementById(`${i}`));
+          const videoTargets = document.querySelectorAll('[mindar-image-target]');
+
+          const enableAudio = () => {
+            videos.forEach((video) => {
+              video.muted = false;
+            });
+            document.removeEventListener('click', enableAudio);
+          };
+
+          document.addEventListener('click', enableAudio);
+
+          // Handle play/pause for each video based on target visibility
+          videoTargets.forEach((target, index) => {
+            const video = videos[index];
+
+            target.addEventListener('targetFound', () => {
+              console.log(`Target ${index} detected! Playing video...`);
+              video.play();
+            });
+
+            target.addEventListener('targetLost', () => {
+              console.log(`Target ${index} lost! Pausing video...`);
+              video.pause();
+            });
+          });
+        });
+      </script>
     </a-scene>
-
-    <script>
-      document.addEventListener('DOMContentLoaded', () => {
-        const video = document.getElementById('exampleVideo');
-        const overlay = document.getElementById('overlay');
-        const videoPlane = document.querySelector('[mindar-image-target]');
-
-        // Ensure video plays when user clicks
-        const enableAudio = () => {
-          video.muted = false; // Unmute the video
-          video.play(); // Play the video
-          overlay.style.display = 'none'; // Hide overlay
-          document.removeEventListener('click', enableAudio); // Remove event listener
-        };
-
-        // Add user interaction to start the video
-        document.addEventListener('click', enableAudio);
-
-        // Play video when target is found
-        videoPlane.addEventListener('targetFound', () => {
-          console.log('Target detected! Resuming video...');
-          if (video.paused) {
-            video.play(); // Resume video playback
-          }
-        });
-
-        // Pause video when target is lost
-        videoPlane.addEventListener('targetLost', () => {
-          console.log('Target lost! Pausing video...');
-          video.pause(); // Pause video playback
-        });
-      });
-    </script>
   </body>
 </html>
