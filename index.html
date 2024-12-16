@@ -42,10 +42,10 @@
         border-radius: 5px;
         cursor: pointer;
       }
-</style>
+    </style>
   </head>
   <body>
-     <!-- Overlay Message -->
+    <!-- Overlay Message -->
     <div id="overlay">Tap anywhere to start AR with audio</div>
 
     <!-- Fallback UI -->
@@ -70,8 +70,6 @@
         <video id="10" src="https://cdn.glitch.global/47cb3597-937e-4975-9047-af4b82a887a7/10.mp4?v=1734351370840" loop muted crossorigin="anonymous"></video>
         <video id="11" src="https://cdn.glitch.global/47cb3597-937e-4975-9047-af4b82a887a7/11.mp4?v=1734351373819" loop muted crossorigin="anonymous"></video>
         
-        <!-- Add more videos as needed -->
-
         <!-- Preloading images -->
         <img id="icon1" src="https://cdn.glitch.global/47cb3597-937e-4975-9047-af4b82a887a7/logo-placeholder-image-6-1024x1024.png?v=1734184300693" />
         <img id="icon2" src="https://cdn.glitch.global/47cb3597-937e-4975-9047-af4b82a887a7/logo-placeholder-image-6-1024x1024.png?v=1734184300693" />
@@ -82,42 +80,13 @@
       <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
 
       <!-- Define video entities dynamically -->
-    <a-entity mindar-image-target="targetIndex: 0">
-  <a-video src="#0" position="0 0 0" scale="1 0.5 1" rotation="0 0 0"></a-video>
-</a-entity>
-<a-entity mindar-image-target="targetIndex: 1">
-  <a-video src="#1" position="0 0 0" scale="1 0.5 1" rotation="0 0 0"></a-video>
-</a-entity>
-<a-entity mindar-image-target="targetIndex: 2">
-  <a-video src="#2" position="0 0 0" scale="1 0.5 1" rotation="0 0 0"></a-video>
-</a-entity>
-<a-entity mindar-image-target="targetIndex: 3">
-  <a-video src="#3" position="0 0 0" scale="1 0.5 1" rotation="0 0 0"></a-video>
-</a-entity>
-<a-entity mindar-image-target="targetIndex: 4">
-  <a-video src="#4" position="0 0 0" scale="1 0.5 1" rotation="0 0 0"></a-video>
-</a-entity>
-<a-entity mindar-image-target="targetIndex: 5">
-  <a-video src="#5" position="0 0 0" scale="1 0.5 1" rotation="0 0 0"></a-video>
-</a-entity>
-<a-entity mindar-image-target="targetIndex: 6">
-  <a-video src="#6" position="0 0 0" scale="1 0.5 1" rotation="0 0 0"></a-video>
-</a-entity>
-<a-entity mindar-image-target="targetIndex: 7">
-  <a-video src="#7" position="0 0 0" scale="1 0.5 1" rotation="0 0 0"></a-video>
-</a-entity>
-<a-entity mindar-image-target="targetIndex: 8">
-  <a-video src="#8" position="0 0 0" scale="1 0.5 1" rotation="0 0 0"></a-video>
-</a-entity>
-<a-entity mindar-image-target="targetIndex: 9">
-  <a-video src="#9" position="0 0 0" scale="1 0.5 1" rotation="0 0 0"></a-video>
-</a-entity>
-<a-entity mindar-image-target="targetIndex: 10">
-  <a-video src="#10" position="0 0 0" scale="1 0.5 1" rotation="0 0 0"></a-video>
-</a-entity>
-<a-entity mindar-image-target="targetIndex: 11">
-  <a-video src="#11" position="0 0 0" scale="1 0.5 1" rotation="0 0 0"></a-video>
-</a-entity>
+      <a-entity mindar-image-target="targetIndex: 0">
+        <a-video src="#0" position="0 0 0" scale="1 0.5 1" rotation="0 0 0"></a-video>
+      </a-entity>
+      <a-entity mindar-image-target="targetIndex: 1">
+        <a-video src="#1" position="0 0 0" scale="1 0.5 1" rotation="0 0 0"></a-video>
+      </a-entity>
+      <!-- Add additional targets as needed -->
 
       <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -128,6 +97,10 @@
             videos.forEach((video) => {
               video.muted = false;
             });
+
+            // Hide the overlay
+            document.getElementById('overlay').style.display = 'none';
+
             document.removeEventListener('click', enableAudio);
           };
 
@@ -141,19 +114,7 @@
               console.log(`Target ${index} detected! Playing video...`);
               video.play();
             });
- // Target the assets container
-    const assetsContainer = document.getElementById('videoAssets');
 
-    // Dynamically add videos to the container
-    videoSources.forEach((src, index) => {
-      const video = document.createElement('video');
-      video.setAttribute('id', `video${index + 1}`);
-      video.setAttribute('src', src);
-      video.setAttribute('loop', 'true');
-      video.setAttribute('autoplay', 'true');
-      video.setAttribute('muted', 'true');
-      video.setAttribute('crossorigin', 'anonymous');
-      assetsContainer.appendChild(video);
             target.addEventListener('targetLost', () => {
               console.log(`Target ${index} lost! Pausing video...`);
               video.pause();
