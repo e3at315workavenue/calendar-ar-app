@@ -4,31 +4,55 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
+    <style> 
+      
+      /* User tap overlay */
+      #overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.8);
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5em;
+        z-index: 10;
+        cursor: pointer;
+        text-align: center;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Overlay prompting user tap -->
+    <div id="overlay">Tap anywhere to start AR</div>
+</style>
   </head>
   <body>
     <a-scene mindar-image="imageTargetSrc: https://cdn.glitch.global/47cb3597-937e-4975-9047-af4b82a887a7/targets%20(3).mind?v=1734189826382;" color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
       <a-assets>
         <!-- Preloading video assets -->
-        <video id="0" src="https://cdn.glitch.global/47cb3597-937e-4975-9047-af4b82a887a7/0.mp4?v=1734351300566" loop muted crossorigin="anonymous"></video>
-        <video id="1" src="https://cdn.glitch.global/47cb3597-937e-4975-9047-af4b82a887a7/1.mp4?v=1734351338344" loop muted crossorigin="anonymous"></video>
-        <video id="2" src="https://cdn.glitch.global/47cb3597-937e-4975-9047-af4b82a887a7/2.mp4?v=1734351317863" loop muted crossorigin="anonymous"></video>
-        <video id="3" src="https://cdn.glitch.global/47cb3597-937e-4975-9047-af4b82a887a7/3.mp4?v=1734351301918" loop muted crossorigin="anonymous"></video>
-        <video id="4" src="https://cdn.glitch.global/47cb3597-937e-4975-9047-af4b82a887a7/4.mp4?v=1734351355232" loop muted crossorigin="anonymous"></video>
-        <video id="5" src="https://cdn.glitch.global/47cb3597-937e-4975-9047-af4b82a887a7/5.mp4?v=1734351352641" loop muted crossorigin="anonymous"></video>
-        <video id="6" src="https://cdn.glitch.global/47cb3597-937e-4975-9047-af4b82a887a7/6.mp4?v=1734351392879" loop muted crossorigin="anonymous"></video>
-        <video id="7" src="https://cdn.glitch.global/47cb3597-937e-4975-9047-af4b82a887a7/7.mp4?v=1734351357884" loop muted crossorigin="anonymous"></video>
-        <video id="8" src="https://cdn.glitch.global/47cb3597-937e-4975-9047-af4b82a887a7/8.mp4?v=1734351361677" loop muted crossorigin="anonymous"></video>
-        <video id="9" src="https://cdn.glitch.global/47cb3597-937e-4975-9047-af4b82a887a7/9.mp4?v=1734351364072" loop muted crossorigin="anonymous"></video>
-        <video id="10" src="https://cdn.glitch.global/47cb3597-937e-4975-9047-af4b82a887a7/10.mp4?v=1734351370840" loop muted crossorigin="anonymous"></video>
-        <video id="11" src="https://cdn.glitch.global/47cb3597-937e-4975-9047-af4b82a887a7/11.mp4?v=1734351373819" loop muted crossorigin="anonymous"></video>
+        <video id="0" src="https://cdn.glitch.me/47cb3597-937e-4975-9047-af4b82a887a7/0.mp4?v=1734186904210" loop muted crossorigin="anonymous"></video>
+        <video id="1" src="https://cdn.glitch.me/47cb3597-937e-4975-9047-af4b82a887a7/1.mp4?v=1734186961809" loop muted crossorigin="anonymous"></video>
+        <video id="2" src="https://cdn.glitch.me/47cb3597-937e-4975-9047-af4b82a887a7/2.mp4?v=1734186961809" loop muted crossorigin="anonymous"></video>
+        <video id="3" src="https://cdn.glitch.me/47cb3597-937e-4975-9047-af4b82a887a7/3.mp4?v=1734186961809" loop muted crossorigin="anonymous"></video>
+        <video id="4" src="https://cdn.glitch.me/47cb3597-937e-4975-9047-af4b82a887a7/4.mp4?v=1734186961809" loop muted crossorigin="anonymous"></video>
+        <video id="5" src="https://cdn.glitch.me/47cb3597-937e-4975-9047-af4b82a887a7/5.mp4?v=1734186961809" loop muted crossorigin="anonymous"></video>
+        <video id="6" src="https://cdn.glitch.me/47cb3597-937e-4975-9047-af4b82a887a7/6.mp4?v=1734186961809" loop muted crossorigin="anonymous"></video>
+        <video id="7" src="https://cdn.glitch.me/47cb3597-937e-4975-9047-af4b82a887a7/7.mp4?v=1734186961809" loop muted crossorigin="anonymous"></video>
+        <video id="8" src="https://cdn.glitch.me/47cb3597-937e-4975-9047-af4b82a887a7/8.mp4?v=1734186961809" loop muted crossorigin="anonymous"></video>
+        <video id="9" src="https://cdn.glitch.me/47cb3597-937e-4975-9047-af4b82a887a7/9.mp4?v=1734186961809" loop muted crossorigin="anonymous"></video>
+        <video id="10" src="https://cdn.glitch.me/47cb3597-937e-4975-9047-af4b82a887a7/10.mp4?v=1734186961809" loop muted crossorigin="anonymous"></video>
+        <video id="11" src="https://cdn.glitch.me/47cb3597-937e-4975-9047-af4b82a887a7/11.mp4?v=1734186961809" loop muted crossorigin="anonymous"></video>
         
         <!-- Add more videos as needed -->
 
         <!-- Preloading images -->
         <img id="icon1" src="https://cdn.glitch.global/47cb3597-937e-4975-9047-af4b82a887a7/logo-placeholder-image-6-1024x1024.png?v=1734184300693" />
         <img id="icon2" src="https://cdn.glitch.global/47cb3597-937e-4975-9047-af4b82a887a7/logo-placeholder-image-6-1024x1024.png?v=1734184300693" />
-        <img id="icon3" src="https://cdn.glitch.global/47cb3597-937e-4975-9047-af4b82a887a7/logo-placeholder-image-6-1024x1024.png?v=1734184300693" />
-        <img id="icon4" src="https://cdn.glitch.global/47cb3597-937e-4975-9047-af4b82a887a7/logo-placeholder-image-6-1024x1024.png?v=1734184300693" />
       </a-assets>
 
       <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
@@ -82,6 +106,11 @@
             });
             document.removeEventListener('click', enableAudio);
           };
+          // Tap overlay to allow autoplay
+          document.getElementById("overlay").addEventListener("click", () => {
+          document.querySelectorAll("video").forEach((video) => video.play());
+          document.getElementById("overlay").style.display = "none";
+      });
 
           document.addEventListener('click', enableAudio);
 
