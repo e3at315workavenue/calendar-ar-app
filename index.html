@@ -98,6 +98,18 @@
               video.muted = false;
             });
 
+            const enableAudio = () => {
+  videos.forEach((video) => {
+    video.muted = false; // Unmute the videos
+    video.play(); // Start playing the video immediately
+  });
+
+  // Hide the overlay
+  document.getElementById('overlay').style.display = 'none';
+
+  document.removeEventListener('click', enableAudio);
+};
+
             // Hide the overlay
             document.getElementById('overlay').style.display = 'none';
 
