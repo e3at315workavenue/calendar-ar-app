@@ -122,7 +122,7 @@
   <a-video src="#11" position="0 0 0" scale="1 0.5 1" rotation="0 0 0"></a-video>
 </a-entity>
 
-    <script>
+   <script>
   document.addEventListener('DOMContentLoaded', () => {
     const videos = Array.from({ length: 12 }, (_, i) => document.getElementById(`${i}`));
     const videoTargets = document.querySelectorAll('[mindar-image-target]');
@@ -141,7 +141,7 @@
         video.muted = false; // Enable audio for all videos
       });
 
-      // Hide the overlay
+      // Hide the overlay after tap
       document.getElementById('overlay').style.display = 'none';
 
       // Remove the event listener to avoid redundant calls
@@ -167,8 +167,23 @@
         video.currentTime = 0; // Reset the video
       });
     });
+
+    // Show overlay text after AR scene is loaded
+    const scene = document.querySelector('a-scene');
+
+    scene.addEventListener('loaded', () => {
+      // Once the scene is loaded, show the overlay text
+      document.getElementById('overlay').innerText = 'Tap anywhere to start AR with audio';
+    });
+
+    // You can also listen for MindAR's event for when the scanner is ready
+    scene.addEventListener('mindar-scanner-loaded', () => {
+      // Show the overlay message when the scanner UI is visible and ready
+      document.getElementById('overlay').style.display = 'flex';
+    });
   });
 </script>
+
     </a-scene>
   </body>
 </html>
