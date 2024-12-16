@@ -1,59 +1,11 @@
+
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
-    <style>  
-      #overlay {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.7);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: white;
-        font-size: 18px;
-        z-index: 9999;
-      }
-      #fallback {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.9);
-        color: white;
-        font-size: 18px;
-        display: none;
-        justify-content: center;
-        align-items: center;
-        z-index: 9999;
-        flex-direction: column;
-      }
-      #fallback button {
-        margin-top: 20px;
-        padding: 10px 20px;
-        background-color: #007bff;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-      }
-    </style>
   </head>
   <body>
-    <!-- Overlay Message -->
-    <div id="overlay">Tap anywhere to start AR with audio</div>
-
-    <!-- Fallback UI -->
-    <div id="fallback">
-      <p>Your browser does not support AR. Please try updating your browser or using a compatible device.</p>
-      <button onclick="window.location.reload()">Retry</button>
-    </div>
-
     <a-scene mindar-image="imageTargetSrc: https://cdn.glitch.global/47cb3597-937e-4975-9047-af4b82a887a7/targets%20(3).mind?v=1734189826382;" color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
       <a-assets>
         <!-- Preloading video assets -->
@@ -70,6 +22,8 @@
         <video id="10" src="https://cdn.glitch.global/47cb3597-937e-4975-9047-af4b82a887a7/10.mp4?v=1734351370840" loop muted crossorigin="anonymous"></video>
         <video id="11" src="https://cdn.glitch.global/47cb3597-937e-4975-9047-af4b82a887a7/11.mp4?v=1734351373819" loop muted crossorigin="anonymous"></video>
         
+        <!-- Add more videos as needed -->
+
         <!-- Preloading images -->
         <img id="icon1" src="https://cdn.glitch.global/47cb3597-937e-4975-9047-af4b82a887a7/logo-placeholder-image-6-1024x1024.png?v=1734184300693" />
         <img id="icon2" src="https://cdn.glitch.global/47cb3597-937e-4975-9047-af4b82a887a7/logo-placeholder-image-6-1024x1024.png?v=1734184300693" />
@@ -80,63 +34,73 @@
       <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
 
       <!-- Define video entities dynamically -->
-      <a-entity mindar-image-target="targetIndex: 0">
-        <a-video src="#0" position="0 0 0" scale="1 0.5 1" rotation="0 0 0"></a-video>
-      </a-entity>
-      <a-entity mindar-image-target="targetIndex: 1">
-        <a-video src="#1" position="0 0 0" scale="1 0.5 1" rotation="0 0 0"></a-video>
-      </a-entity>
-      <!-- Add additional targets as needed -->
+    <a-entity mindar-image-target="targetIndex: 0">
+  <a-video src="#0" position="0 0 0" scale="1 0.5 1" rotation="0 0 0"></a-video>
+</a-entity>
+<a-entity mindar-image-target="targetIndex: 1">
+  <a-video src="#1" position="0 0 0" scale="1 0.5 1" rotation="0 0 0"></a-video>
+</a-entity>
+<a-entity mindar-image-target="targetIndex: 2">
+  <a-video src="#2" position="0 0 0" scale="1 0.5 1" rotation="0 0 0"></a-video>
+</a-entity>
+<a-entity mindar-image-target="targetIndex: 3">
+  <a-video src="#3" position="0 0 0" scale="1 0.5 1" rotation="0 0 0"></a-video>
+</a-entity>
+<a-entity mindar-image-target="targetIndex: 4">
+  <a-video src="#4" position="0 0 0" scale="1 0.5 1" rotation="0 0 0"></a-video>
+</a-entity>
+<a-entity mindar-image-target="targetIndex: 5">
+  <a-video src="#5" position="0 0 0" scale="1 0.5 1" rotation="0 0 0"></a-video>
+</a-entity>
+<a-entity mindar-image-target="targetIndex: 6">
+  <a-video src="#6" position="0 0 0" scale="1 0.5 1" rotation="0 0 0"></a-video>
+</a-entity>
+<a-entity mindar-image-target="targetIndex: 7">
+  <a-video src="#7" position="0 0 0" scale="1 0.5 1" rotation="0 0 0"></a-video>
+</a-entity>
+<a-entity mindar-image-target="targetIndex: 8">
+  <a-video src="#8" position="0 0 0" scale="1 0.5 1" rotation="0 0 0"></a-video>
+</a-entity>
+<a-entity mindar-image-target="targetIndex: 9">
+  <a-video src="#9" position="0 0 0" scale="1 0.5 1" rotation="0 0 0"></a-video>
+</a-entity>
+<a-entity mindar-image-target="targetIndex: 10">
+  <a-video src="#10" position="0 0 0" scale="1 0.5 1" rotation="0 0 0"></a-video>
+</a-entity>
+<a-entity mindar-image-target="targetIndex: 11">
+  <a-video src="#11" position="0 0 0" scale="1 0.5 1" rotation="0 0 0"></a-video>
+</a-entity>
 
-      <!-- Script -->
-    <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        const overlay = document.getElementById("overlay");
-        const fallback = document.getElementById("fallback");
+      <script>
+        document.addEventListener('DOMContentLoaded', () => {
+          const videos = Array.from({ length: 12 }, (_, i) => document.getElementById(`${i}`));
+          const videoTargets = document.querySelectorAll('[mindar-image-target]');
 
-        // Fetch videos and targets
-        const video1 = document.getElementById("video1");
-        const video2 = document.getElementById("video2");
-        const targets = document.querySelectorAll("[mindar-image-target]");
-        let isAudioEnabled = false;
+          const enableAudio = () => {
+            videos.forEach((video) => {
+              video.muted = false;
+            });
+            document.removeEventListener('click', enableAudio);
+          };
 
-        // Tap Event to Enable Audio
-        const enableAudio = () => {
-          if (!isAudioEnabled) {
-            video1.muted = false;
-            video2.muted = false;
-            overlay.style.display = "none";
-            isAudioEnabled = true;
-            console.log("Audio enabled. Videos ready to play.");
-          }
-        };
+          document.addEventListener('click', enableAudio);
 
-        document.body.addEventListener("click", enableAudio);
+          // Handle play/pause for each video based on target visibility
+          videoTargets.forEach((target, index) => {
+            const video = videos[index];
 
-        // Handle Target Events
-        targets.forEach((target, index) => {
-          const video = index === 0 ? video1 : video2;
-
-          target.addEventListener("targetFound", () => {
-            if (isAudioEnabled) {
+            target.addEventListener('targetFound', () => {
+              console.log(`Target ${index} detected! Playing video...`);
               video.play();
-              console.log(`Target ${index} found: Video playing.`);
-            }
-          });
+            });
 
-          target.addEventListener("targetLost", () => {
-            video.pause();
-            console.log(`Target ${index} lost: Video paused.`);
+            target.addEventListener('targetLost', () => {
+              console.log(`Target ${index} lost! Pausing video...`);
+              video.pause();
+            });
           });
         });
-
-        // Browser Compatibility Check
-        if (!navigator.mediaDevices) {
-          fallback.style.display = "flex";
-          console.error("AR not supported in this browser.");
-        }
-      });
-    </script>
+      </script>
     </a-scene>
   </body>
 </html>
