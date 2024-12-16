@@ -1,3 +1,4 @@
+
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -98,22 +99,10 @@
               video.muted = false;
             });
 
-            const enableAudio = () => {
-  videos.forEach((video) => {
-    video.muted = false; // Unmute the videos
-    video.play(); // Start playing the video immediately
-  });
-
-  // Hide the overlay
+           // Hide the overlay
   document.getElementById('overlay').style.display = 'none';
 
   document.removeEventListener('click', enableAudio);
-};
-
-            // Hide the overlay
-            document.getElementById('overlay').style.display = 'none';
-
-            document.removeEventListener('click', enableAudio);
           };
 
           document.addEventListener('click', enableAudio);
