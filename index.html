@@ -106,11 +106,7 @@
             });
             document.removeEventListener('click', enableAudio);
           };
-          // Tap overlay to allow autoplay
-          document.getElementById("overlay").addEventListener("click", () => {
-          document.querySelectorAll("video").forEach((video) => video.play());
-          document.getElementById("overlay").style.display = "none";
-      });
+     
 
           document.addEventListener('click', enableAudio);
 
