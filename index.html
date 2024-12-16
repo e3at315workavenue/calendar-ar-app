@@ -125,7 +125,12 @@
   document.addEventListener('DOMContentLoaded', () => {
     const videos = Array.from({ length: 12 }, (_, i) => document.getElementById(`${i}`));
     const videoTargets = document.querySelectorAll('[mindar-image-target]');
+  // Hide the overlay
+  document.getElementById('overlay').style.display = 'none';
 
+  // Remove the event listener after the first tap
+  document.removeEventListener('click', enableAudio);
+};
     // Function to pause all videos
     const pauseAllVideos = () => {
       videos.forEach((video) => {
