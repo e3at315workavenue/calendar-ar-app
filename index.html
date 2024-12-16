@@ -121,36 +121,47 @@
   <a-video src="#11" position="0 0 0" scale="1 0.5 1" rotation="0 0 0"></a-video>
 </a-entity>
 
-      <script>
-        document.addEventListener('DOMContentLoaded', () => {
-          const videos = Array.from({ length: 12 }, (_, i) => document.getElementById(`${i}`));
-          const videoTargets = document.querySelectorAll('[mindar-image-target]');
+     <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const videos = Array.from({ length: 12 }, (_, i) => document.getElementById(`${i}`));
+    const videoTargets = document.querySelectorAll('[mindar-image-target]');
 
-          const enableAudio = () => {
-            videos.forEach((video) => {
-              video.muted = false;
-            });
-            document.removeEventListener('click', enableAudio);
-          };
+    // Function to pause all videos
+    const pauseAllVideos = () => {
+      videos.forEach((video) => {
+        video.pause();
+        video.currentTime = 0; // Optionally reset video to start
+      });
+    };
 
-          document.addEventListener('click', enableAudio);
+    // Function to enable audio when user taps
+    const enableAudio = () => {
+      videos.forEach((video) => {
+        video.muted = false;
+      });
+      document.removeEventListener('click', enableAudio);
+    };
 
-          // Handle play/pause for each video based on target visibility
-          videoTargets.forEach((target, index) => {
-            const video = videos[index];
+    document.addEventListener('click', enableAudio);
 
-            target.addEventListener('targetFound', () => {
-              console.log(`Target ${index} detected! Playing video...`);
-              video.play();
-            });
+    // Handle play/pause for each video based on target visibility
+    videoTargets.forEach((target, index) => {
+      const video = videos[index];
 
-            target.addEventListener('targetLost', () => {
-              console.log(`Target ${index} lost! Pausing video...`);
-              video.pause();
-            });
-          });
-        });
-      </script>
+      target.addEventListener('targetFound', () => {
+        console.log(`Target ${index} detected! Playing video...`);
+        pauseAllVideos(); // Pause all videos first
+        video.play(); // Play the correct video
+      });
+
+      target.addEventListener('targetLost', () => {
+        console.log(`Target ${index} lost! Pausing video...`);
+        video.pause(); // Pause the current video
+        video.currentTime = 0; // Optionally reset the video
+      });
+    });
+  });
+</script>
     </a-scene>
   </body>
 </html>
