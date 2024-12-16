@@ -141,7 +141,19 @@
               console.log(`Target ${index} detected! Playing video...`);
               video.play();
             });
+ // Target the assets container
+    const assetsContainer = document.getElementById('videoAssets');
 
+    // Dynamically add videos to the container
+    videoSources.forEach((src, index) => {
+      const video = document.createElement('video');
+      video.setAttribute('id', `video${index + 1}`);
+      video.setAttribute('src', src);
+      video.setAttribute('loop', 'true');
+      video.setAttribute('autoplay', 'true');
+      video.setAttribute('muted', 'true');
+      video.setAttribute('crossorigin', 'anonymous');
+      assetsContainer.appendChild(video);
             target.addEventListener('targetLost', () => {
               console.log(`Target ${index} lost! Pausing video...`);
               video.pause();
