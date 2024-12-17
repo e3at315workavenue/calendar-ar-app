@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Envelope AR</title>
+    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
+    <style>
+        /* Optional styling */
+        body {
+            margin: 0;
+            height: 100%;
+            overflow: hidden;
+            background-color: black;
+        }
+        #overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 18px;
+            z-index: 9999;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Overlay message -->
+<div id="overlay">Tap anywhere to start AR with audio</div>
+
+<a-scene mindar-image="imageTargetSrc: https://your-targets-file-url.mind" color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
+    <a-assets>
+        <!-- Preload all 3D models and audio files -->
+        <a-asset-item id="model" src="model-url.gltf"></a-asset-item>
+        <audio id="audio1" src="audio1.mp3"></audio>
+        <audio id="audio2" src="audio2.mp3"></audio>
+        <!-- Add more models and audios for all 35 targets -->
+    </a-assets>
+
+    <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+
+    <!-- Define each target and corresponding 3D model/audio -->
+    <a-entity mindar-image-target="targetIndex: 0">
+        <a-entity gltf-model="#model" scale="1 1 1" position="0 0 0"></a-entity>
+        <a-sound src="#audio1" position="0 1 0" autoplay="false"></a-sound>
+    </a-entity>
+    <!-- Repeat for other targets -->
+    <a-entity mindar-image-target="targetIndex: 1">
+        <a-entity gltf-model="#model" scale="1 1 1" position="0 0 0"></a-entity>
+        <a-sound src="#audio2" position="0 1 0" autoplay="false"></a-sound>
+    </a-entity>
+    <!-- Continue defining for the rest of the 35 targets -->
+
+</a-scene>
+
+<script>
+    // Event listener for enabling audio when clicked
+    document.addEventListener('click', () => {
+        const overlay = document.getElementById('overlay');
+        overlay.style.display = 'none'; // Hide the overlay
+        // Enable audio for all videos or audio tracks
+        const sounds = document.querySelectorAll('a-sound');
+        sounds.forEach(sound => sound.components.sound.playSound());
+    });
+</script>
+
+</body>
+</html>
