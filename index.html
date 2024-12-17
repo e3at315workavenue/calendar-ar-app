@@ -1,12 +1,9 @@
-
-
-
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
-<style>  
+    <style>  
       #overlay {
         position: absolute;
         top: 0;
@@ -49,14 +46,14 @@
   </head>
   <body>
      <!-- Overlay Message -->
-    <div id="overlay">Tap anywhere to start AR with audio</div>
+    <div id="overlay">Tap anywhere to start AR</div>
 
     <!-- Fallback UI -->
     <div id="fallback">
       <p>Your browser does not support AR. Please try updating your browser or using a compatible device.</p>
       <button onclick="window.location.reload()">Retry</button>
     </div>
-    
+
     <a-scene mindar-image="imageTargetSrc: https://cdn.glitch.global/47cb3597-937e-4975-9047-af4b82a887a7/targets%20(3).mind?v=1734189826382;" color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
       <a-assets>
         <!-- Preloading video assets -->
@@ -126,60 +123,85 @@
   document.addEventListener('DOMContentLoaded', () => {
     const videos = Array.from({ length: 12 }, (_, i) => document.getElementById(`${i}`));
     const videoTargets = document.querySelectorAll('[mindar-image-target]');
-    
-    // Function to pause all videos
-    const pauseAllVideos = () => {
+    let activeVideo = null; // Track the currently active video
+    let targetDetected = false; // Track if a target is detected
+
+    // Ensure all videos are paused, muted, and reset initially
+    videos.forEach((video) => {
+      video.pause();
+      video.muted = true; // Start all videos muted
+    });
+
+    // Function to pause all videos except the active one
+    const pauseAllVideos = (excludeVideo = null) => {
       videos.forEach((video) => {
-        video.pause();
-        video.currentTime = 0; // Reset video to start
+        if (video !== excludeVideo) {
+          video.pause();
+          video.currentTime = 0; // Reset video if not active
+          video.muted = true;
+        }
       });
     };
 
-    // Function to enable audio and hide the overlay
-    const enableAudio = () => {
-      videos.forEach((video) => {
-        video.muted = false; // Enable audio for all videos
-      });
-
-      // Hide the overlay after tap
-      document.getElementById('overlay').style.display = 'none';
-
-      // Remove the event listener to avoid redundant calls
-      document.removeEventListener('click', enableAudio);
+    // Function to play the active video
+    const playActiveVideo = () => {
+      if (targetDetected && activeVideo) {
+        activeVideo.muted = false; // Unmute video
+        activeVideo.play(); // Play video from current time
+        console.log('Playing video with audio after user tap.');
+        document.getElementById('overlay').style.display = 'none'; // Hide overlay
+        targetDetected = false;
+      }
     };
 
-    // Listen for user tap to enable audio
-    document.addEventListener('click', enableAudio);
-
-    // Handle play/pause for each video based on target visibility
+    // Handle target detection
     videoTargets.forEach((target, index) => {
       const video = videos[index];
 
       target.addEventListener('targetFound', () => {
-        console.log(`Target ${index} detected! Playing video...`);
-        pauseAllVideos(); // Pause all videos first
-        video.play(); // Play the correct video
+        console.log(`Target ${index} detected!`);
+        if (activeVideo !== video) {
+          pauseAllVideos(video); // Pause other videos
+          activeVideo = video; // Set the current video
+        }
+        targetDetected = true; // Set detection flag
+
+        // Play immediately if video was already playing
+        if (!video.paused) {
+          console.log(`Resuming video for target ${index}...`);
+          video.play(); // Resume video
+          document.getElementById('overlay').style.display = 'none'; // Hide prompt
+          return;
+        }
+
+        // Otherwise, wait for user tap if first time
+        document.getElementById('overlay').style.display = 'flex';
+        console.log(`Waiting for user tap to play video for target ${index}`);
       });
 
       target.addEventListener('targetLost', () => {
         console.log(`Target ${index} lost! Pausing video...`);
-        video.pause(); // Pause the current video
-        video.currentTime = 0; // Reset the video
+        video.pause(); // Pause video but don't reset time
+        activeVideo = null; // Clear active video
+        targetDetected = false;
+        document.getElementById('overlay').style.display = 'none'; // Hide tap prompt
       });
     });
+
+    // Listen for user tap to play the video
+    document.addEventListener('click', playActiveVideo);
 
     // Show overlay text after AR scene is loaded
     const scene = document.querySelector('a-scene');
 
     scene.addEventListener('loaded', () => {
-      // Once the scene is loaded, show the overlay text
-      document.getElementById('overlay').innerText = 'Tap anywhere to start AR with audio';
+      console.log('AR scene loaded.');
+      document.getElementById('overlay').innerText = 'Tap anywhere to start the video';
     });
 
-    // You can also listen for MindAR's event for when the scanner is ready
+    // MindAR scanner ready event
     scene.addEventListener('mindar-scanner-loaded', () => {
-      // Show the overlay message when the scanner UI is visible and ready
-      document.getElementById('overlay').style.display = 'flex';
+      console.log('MindAR scanner loaded.');
     });
   });
 </script>
@@ -187,4 +209,3 @@
     </a-scene>
   </body>
 </html>
-
