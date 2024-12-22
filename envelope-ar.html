@@ -7,18 +7,16 @@
   </head>
   <body>
     <a-scene mindar-image="imageTargetSrc: https://cdn.glitch.global/47cb3597-937e-4975-9047-af4b82a887a7/targets%20(4).mind?v=1734864253259; showStats: true;" color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
-    <a-assets>
-  <img id="card" src="https://cdn.glitch.global/adde49db-4a61-440b-9334-fc966a03a0f6/DALL%C2%B7E%202024-12-19%2019.04.00%20-%20Create%20a%20circular%20Gond%20art%20design%20in%20black%20and%20white%20with%20intricate%20patterns%20and%20traditional%20motifs%20such%20as%20animals%2C%20birds%2C%20trees%2C%20and%20geometric%20patte.webp?v=1734868505787" />
-  <a-asset-item id="sceneModel" src="https://raw.githubusercontent.com/e3at315workavenue/calendar-ar-app/main/scene.gltf"></a-asset-item>
-</a-assets>
+      <a-assets>
+        <img id="card" src="path/to/your/card-image.png" />
+        <a-asset-item id="sceneModel" src="https://raw.githubusercontent.com/e3at315workavenue/calendar-ar-app/main/scene.gltf"></a-asset-item>
+      </a-assets>
 
-
-      <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
-
+      <a-camera position="0 1.6 3" look-controls="enabled: false"></a-camera>
 
       <a-entity mindar-image-target="targetIndex: 0">
         <a-plane src="#card" position="0 0 0" height="0.552" width="1" rotation="0 0 0"></a-plane>
-        <a-gltf-model rotation="0 0 0 " position="0 0 0.1" scale="0.005 0.005 0.005" src="#sceneModel" animation="property: position; to: 0 0.1 0.1; dur: 1000; easing: easeInOutQuad; loop: true; dir: alternate"> </a-gltf-model>
+        <a-gltf-model rotation="0 0 0" position="0 0 0.1" scale="0.005 0.005 0.005" src="#sceneModel" animation="property: position; to: 0 0.1 0.1; dur: 1000; easing: easeInOutQuad; loop: true; dir: alternate"></a-gltf-model>
       </a-entity>
     </a-scene>
   </body>
