@@ -145,6 +145,26 @@
         }
       });
     };
+    target.addEventListener('targetLost', () => {
+  console.log(`Target ${index} lost! Pausing video...`);
+  video.pause(); // Pause video but don't reset time
+  activeVideo = null; // Clear active video
+  targetDetected = false;
+  document.getElementById('overlay').style.display = 'none'; // Ensure overlay hides when target is lost
+});
+
+    let isClickListenerAttached = false;
+if (!isClickListenerAttached) {
+  document.addEventListener('click', playActiveVideo);
+  isClickListenerAttached = true;
+}
+
+if (targetDetected && activeVideo) {
+  activeVideo.muted = false;
+  activeVideo.play();
+} else {
+  console.warn('No active video to play.');
+}
 
     // Function to play the active video
     const playActiveVideo = () => {
