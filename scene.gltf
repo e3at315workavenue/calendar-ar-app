@@ -1,4 +1,32 @@
 {
+  "asset": {
+    "version": "2.0",
+    "generator": "Khronos glTF BlenderExporter"
+  },
+  "buffers": [
+    {
+      "uri": "https://raw.githubusercontent.com/e3at315workavenue/calendar-ar-app/main/scene.bin"
+    }
+  ],
+  "images": [
+    {
+      "uri": "path/to/texture.png"
+    }
+  ],
+  "meshes": [
+    {
+      "primitives": [
+        {
+          "attributes": {
+            "POSITION": 0,
+            "NORMAL": 1
+          },
+          "indices": 2
+        }
+      ]
+    }
+  ]
+}{
   "accessors": [
     {
       "bufferView": 3,
