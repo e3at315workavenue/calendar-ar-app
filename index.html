@@ -56,8 +56,7 @@
 <a href="envelope-ar.html">
     <button>Open Envelope AR</button>
 </a>
-          
-    <a-scene mindar-image="imageTargetSrc: https://cdn.glitch.global/47cb3597-937e-4975-9047-af4b82a887a7/targets%20(3).mind?v=1734189826382; showStats: true; filterMinCF: 0.1; filterBeta: 10; warmupTolerance: 1; missTolerance: 1; maxTrack: 1"
+    <a-scene mindar-image="imageTargetSrc: https://cdn.glitch.global/47cb3597-937e-4975-9047-af4b82a887a7/targets%20(3).mind?v=1734189826382;" color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
       <a-assets>
         <!-- Preloading video assets -->
         <video id="0" src="https://cdn.glitch.global/47cb3597-937e-4975-9047-af4b82a887a7/0.mp4?v=1734351300566" loop muted crossorigin="anonymous"></video>
@@ -124,7 +123,7 @@
 
    <script>
   document.addEventListener('DOMContentLoaded', () => {
-    const videos = Array.from({ length: 12 }, (_, i) => document.getElementById(${i}));
+    const videos = Array.from({ length: 12 }, (_, i) => document.getElementById(`${i}`));
     const videoTargets = document.querySelectorAll('[mindar-image-target]');
     let activeVideo = null; // Track the currently active video
     let targetDetected = false; // Track if a target is detected
@@ -162,7 +161,7 @@
       const video = videos[index];
 
       target.addEventListener('targetFound', () => {
-        console.log(Target ${index} detected!);
+        console.log(`Target ${index} detected!`);
         if (activeVideo !== video) {
           pauseAllVideos(video); // Pause other videos
           activeVideo = video; // Set the current video
@@ -171,7 +170,7 @@
 
         // Play immediately if video was already playing
         if (!video.paused) {
-          console.log(Resuming video for target ${index}...);
+          console.log(`Resuming video for target ${index}...`);
           video.play(); // Resume video
           document.getElementById('overlay').style.display = 'none'; // Hide prompt
           return;
@@ -179,11 +178,11 @@
 
         // Otherwise, wait for user tap if first time
         document.getElementById('overlay').style.display = 'flex';
-        console.log(Waiting for user tap to play video for target ${index});
+        console.log(`Waiting for user tap to play video for target ${index}`);
       });
 
       target.addEventListener('targetLost', () => {
-        console.log(Target ${index} lost! Pausing video...);
+        console.log(`Target ${index} lost! Pausing video...`);
         video.pause(); // Pause video but don't reset time
         activeVideo = null; // Clear active video
         targetDetected = false;
