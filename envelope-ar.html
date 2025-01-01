@@ -3,16 +3,51 @@
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v7.0.0/dist/aframe-extras.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
-    <style>
-      body {
+   <style>
+    body {
         margin: 0;
         overflow: hidden;
-      }
-    </style>
+    }
+   html, body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+a-scene {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+a-video {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+    #overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 18px;
+        z-index: 9999;
+    }
+</style>
+
   </head>
   <body>
+    <!-- Overlay Prompt -->
+    <div id="overlay">Tap anywhere to start AR</div>
+
     <a-scene
       mindar-image="imageTargetSrc: https://cdn.glitch.global/adde49db-4a61-440b-9334-fc966a03a0f6/targets%20(7).mind?v=1735283569954;"
       color-space="sRGB"
@@ -20,103 +55,141 @@
       vr-mode-ui="enabled: false"
       device-orientation-permission-ui="enabled: false"
     >
-      <!-- Preload assets -->
       <a-assets>
-        <a-asset-item
-          id="robotModel"
-          src="https://cdn.glitch.global/adde49db-4a61-440b-9334-fc966a03a0f6/robot_playground.glb?v=1734958635203"
-        ></a-asset-item>
-        <audio id="audio" src=""></audio>
-      </a-assets>
+  <!-- Preloading 40 audio files -->
+  <audio id="audio0" src="https://cdn.glitch.global/adde49db-4a61-440b-9334-fc966a03a0f6/0.mp3?v=1735282717693"></audio>
+  <audio id="audio1" src="https://cdn.glitch.global/adde49db-4a61-440b-9334-fc966a03a0f6/1.mp3?v=1735282707765"></audio>
+  <audio id="audio2" src="https://cdn.glitch.global/adde49db-4a61-440b-9334-fc966a03a0f6/2.mp3?v=1735282718367"></audio>
+  <audio id="audio3" src="https://cdn.glitch.global/adde49db-4a61-440b-9334-fc966a03a0f6/3.mp3?v=1735282721727"></audio>
+  <audio id="audio4" src="https://cdn.glitch.global/adde49db-4a61-440b-9334-fc966a03a0f6/4.mp3?v=1735282737480"></audio>
+  <audio id="audio5" src="https://cdn.glitch.global/adde49db-4a61-440b-9334-fc966a03a0f6/5.mp3?v=1735282738528"></audio>
+  <audio id="audio6" src="https://cdn.glitch.global/adde49db-4a61-440b-9334-fc966a03a0f6/6.mp3?v=1735282739402"></audio>
+  <audio id="audio7" src="https://cdn.glitch.global/adde49db-4a61-440b-9334-fc966a03a0f6/7.mp3?v=1735282742326"></audio>
+  <audio id="audio8" src="https://cdn.glitch.global/adde49db-4a61-440b-9334-fc966a03a0f6/8.mp3?v=1735282742875"></audio>
+  <audio id="audio9" src="https://cdn.glitch.global/adde49db-4a61-440b-9334-fc966a03a0f6/9.mp3?v=1735282744403"></audio>
+  <audio id="audio10" src="https://cdn.glitch.global/adde49db-4a61-440b-9334-fc966a03a0f6/10.mp3?v=1735282753727"></audio>
+  <audio id="audio11" src="https://cdn.glitch.global/adde49db-4a61-440b-9334-fc966a03a0f6/11.mp3?v=1735282801507"></audio>
+  <audio id="audio12" src="https://cdn.glitch.global/adde49db-4a61-440b-9334-fc966a03a0f6/12.mp3?v=1735282755863"></audio>
+  <audio id="audio13" src="https://cdn.glitch.global/adde49db-4a61-440b-9334-fc966a03a0f6/13.mp3?v=1735282805825"></audio>
+  <audio id="audio14" src="https://cdn.glitch.global/adde49db-4a61-440b-9334-fc966a03a0f6/14.mp3?v=1735282806371"></audio>
+  <audio id="audio15" src="https://cdn.glitch.global/adde49db-4a61-440b-9334-fc966a03a0f6/15.mp3?v=1735282807613"></audio>
+  <audio id="audio16" src="https://cdn.glitch.global/adde49db-4a61-440b-9334-fc966a03a0f6/16.mp3?v=1735282807345"></audio>
+  <audio id="audio17" src="https://cdn.glitch.global/adde49db-4a61-440b-9334-fc966a03a0f6/17.mp3?v=1735282818130"></audio>
+  <audio id="audio18" src="https://cdn.glitch.global/adde49db-4a61-440b-9334-fc966a03a0f6/18.mp3?v=1735282819168"></audio>
+  <audio id="audio19" src="https://cdn.glitch.global/adde49db-4a61-440b-9334-fc966a03a0f6/19.mp3?v=1735282823892"></audio>
+  <audio id="audio20" src="https://cdn.glitch.global/adde49db-4a61-440b-9334-fc966a03a0f6/20.mp3?v=1735282826978"></audio>
+  <audio id="audio21" src="https://cdn.glitch.global/adde49db-4a61-440b-9334-fc966a03a0f6/21.mp3?v=1735282826841"></audio>
+  <audio id="audio22" src="https://cdn.glitch.global/adde49db-4a61-440b-9334-fc966a03a0f6/22.mp3?v=1735282829691"></audio>
+  <audio id="audio23" src="https://cdn.glitch.global/adde49db-4a61-440b-9334-fc966a03a0f6/23.mp3?v=1735282830715"></audio>
+  <audio id="audio24" src="https://cdn.glitch.global/adde49db-4a61-440b-9334-fc966a03a0f6/24.mp3?v=1735282831292"></audio>
+  <audio id="audio25" src="https://cdn.glitch.global/adde49db-4a61-440b-9334-fc966a03a0f6/25.mp3?v=1735282834099"></audio>
+  <audio id="audio26" src="https://cdn.glitch.global/adde49db-4a61-440b-9334-fc966a03a0f6/26.mp3?v=1735282834081"></audio>
+  <audio id="audio27" src="https://cdn.glitch.global/adde49db-4a61-440b-9334-fc966a03a0f6/27.mp3?v=1735282835706"></audio>
+  <audio id="audio28" src="https://cdn.glitch.global/adde49db-4a61-440b-9334-fc966a03a0f6/28.mp3?v=1735282837783"></audio>
+  <audio id="audio29" src="https://cdn.glitch.global/adde49db-4a61-440b-9334-fc966a03a0f6/29.mp3?v=1735282838364"></audio>
+  <audio id="audio30" src="https://cdn.glitch.global/adde49db-4a61-440b-9334-fc966a03a0f6/30.mp3?v=1735282839774"></audio>
+  <audio id="audio31" src="https://cdn.glitch.global/adde49db-4a61-440b-9334-fc966a03a0f6/31.mp3?v=1735282841586"></audio>
+  <audio id="audio32" src="https://cdn.glitch.global/adde49db-4a61-440b-9334-fc966a03a0f6/32.mp3?v=1735282842903"></audio>
+  <audio id="audio33" src="https://cdn.glitch.global/adde49db-4a61-440b-9334-fc966a03a0f6/33.mp3?v=1735282844263"></audio>
+  <audio id="audio34" src="https://cdn.glitch.global/adde49db-4a61-440b-9334-fc966a03a0f6/34.mp3?v=1735282845596"></audio>
+  <audio id="audio35" src="https://cdn.glitch.global/adde49db-4a61-440b-9334-fc966a03a0f6/35.mp3?v=1735282846567"></audio>
+  <audio id="audio36" src="https://cdn.glitch.global/adde49db-4a61-440b-9334-fc966a03a0f6/36.mp3?v=1735282848081"></audio>
+  <audio id="audio37" src="https://cdn.glitch.global/adde49db-4a61-440b-9334-fc966a03a0f6/37.mp3?v=1735282849525"></audio>
+  <audio id="audio38" src="https://cdn.glitch.global/adde49db-4a61-440b-9334-fc966a03a0f6/38.mp3?v=1735282851105"></audio>
+  <audio id="audio39" src="https://cdn.glitch.global/adde49db-4a61-440b-9334-fc966a03a0f6/39.mp3?v=1735282865662"></audio>
+  <audio id="audio40" src="https://cdn.glitch.global/adde49db-4a61-440b-9334-fc966a03a0f6/40.mp3?v=1735282866959"></audio>
+</a-assets>
 
-      <!-- Camera -->
-      <a-camera position="0 1.6 3" look-controls="enabled: false"></a-camera>
+<a-entity mindar-image-target="targetIndex: 0">
+  <a-gltf-model
+    src="https://cdn.example.com/models/robot.glb"
+    position="0 0 0"
+    scale="0.2 0.2 0.2"
+    rotation="0 0 0"
+  ></a-gltf-model>
 
-      <!-- MindAR Target and Model -->
-      <a-entity mindar-image-target="targetIndex: 0">
-        <a-gltf-model
-          rotation="45 0 0"
-          position="0 0 0"
-          scale="0.2 0.2 0.2"
-          src="#robotModel"
-          animation-mixer
-        ></a-gltf-model>
+  <!-- Audio Entities -->
+  <a-entity id="audioEntity0" sound="src: #audio0; autoplay: false;"></a-entity>
+  <a-entity id="audioEntity1" sound="src: #audio1; autoplay: false;"></a-entity>
+  <a-entity id="audioEntity2" sound="src: #audio2; autoplay: false;"></a-entity>
+  <a-entity id="audioEntity3" sound="src: #audio3; autoplay: false;"></a-entity>
+  <a-entity id="audioEntity4" sound="src: #audio4; autoplay: false;"></a-entity>
+  <a-entity id="audioEntity5" sound="src: #audio5; autoplay: false;"></a-entity>
+  <a-entity id="audioEntity6" sound="src: #audio6; autoplay: false;"></a-entity>
+  <a-entity id="audioEntity7" sound="src: #audio7; autoplay: false;"></a-entity>
+  <a-entity id="audioEntity8" sound="src: #audio8; autoplay: false;"></a-entity>
+  <a-entity id="audioEntity9" sound="src: #audio9; autoplay: false;"></a-entity>
+  <a-entity id="audioEntity10" sound="src: #audio10; autoplay: false;"></a-entity>
+  <a-entity id="audioEntity11" sound="src: #audio11; autoplay: false;"></a-entity>
+  <a-entity id="audioEntity12" sound="src: #audio12; autoplay: false;"></a-entity>
+  <a-entity id="audioEntity13" sound="src: #audio13; autoplay: false;"></a-entity>
+  <a-entity id="audioEntity14" sound="src: #audio14; autoplay: false;"></a-entity>
+  <a-entity id="audioEntity15" sound="src: #audio15; autoplay: false;"></a-entity>
+  <a-entity id="audioEntity16" sound="src: #audio16; autoplay: false;"></a-entity>
+  <a-entity id="audioEntity17" sound="src: #audio17; autoplay: false;"></a-entity>
+  <a-entity id="audioEntity18" sound="src: #audio18; autoplay: false;"></a-entity>
+  <a-entity id="audioEntity19" sound="src: #audio19; autoplay: false;"></a-entity>
+  <a-entity id="audioEntity20" sound="src: #audio20; autoplay: false;"></a-entity>
+  <a-entity id="audioEntity21" sound="src: #audio21; autoplay: false;"></a-entity>
+  <a-entity id="audioEntity22" sound="src: #audio22; autoplay: false;"></a-entity>
+  <a-entity id="audioEntity23" sound="src: #audio23; autoplay: false;"></a-entity>
+  <a-entity id="audioEntity24" sound="src: #audio24; autoplay: false;"></a-entity>
+  <a-entity id="audioEntity25" sound="src: #audio25; autoplay: false;"></a-entity>
+  <a-entity id="audioEntity26" sound="src: #audio26; autoplay: false;"></a-entity>
+  <a-entity id="audioEntity27" sound="src: #audio27; autoplay: false;"></a-entity>
+  <a-entity id="audioEntity28" sound="src: #audio28; autoplay: false;"></a-entity>
+  <a-entity id="audioEntity29" sound="src: #audio29; autoplay: false;"></a-entity>
+  <a-entity id="audioEntity30" sound="src: #audio30; autoplay: false;"></a-entity>
+  <a-entity id="audioEntity31" sound="src: #audio31; autoplay: false;"></a-entity>
+  <a-entity id="audioEntity32" sound="src: #audio32; autoplay: false;"></a-entity>
+  <a-entity id="audioEntity33" sound="src: #audio33; autoplay: false;"></a-entity>
+  <a-entity id="audioEntity34" sound="src: #audio34; autoplay: false;"></a-entity>
+  <a-entity id="audioEntity35" sound="src: #audio35; autoplay: false;"></a-entity>
+  <a-entity id="audioEntity36" sound="src: #audio36; autoplay: false;"></a-entity>
+  <a-entity id="audioEntity37" sound="src: #audio37; autoplay: false;"></a-entity>
+  <a-entity id="audioEntity38" sound="src: #audio38; autoplay: false;"></a-entity>
+  <a-entity id="audioEntity39" sound="src: #audio39; autoplay: false;"></a-entity>
+  <a-entity id="audioEntity40" sound="src: #audio40; autoplay: false;"></a-entity>
+</a-entity>
 
-        <!-- Audio Entity -->
-        <a-entity id="audio-entity" sound="autoplay: false; loop: false;"></a-entity>
-      </a-entity>
-    </a-scene>
 
     <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        // Get the URL parameter for 'track'
-        const urlParams = new URLSearchParams(window.location.search);
-        const track = urlParams.get("track");
-
-        // Map track numbers to audio links
-        const audioLinks = {
-                0: "https://cdn.glitch.global/adde49db-4a61-440b-9334-fc966a03a0f6/0.mp3?v=1735282717693",
-          1: "https://cdn.glitch.global/adde49db-4a61-440b-9334-fc966a03a0f6/1.mp3?v=1735282707765",
-          2: "https://cdn.glitch.global/adde49db-4a61-440b-9334-fc966a03a0f6/2.mp3?v=1735282718367",
-          3: "https://cdn.glitch.global/adde49db-4a61-440b-9334-fc966a03a0f6/3.mp3?v=1735282721727",
-          4: "https://cdn.glitch.global/adde49db-4a61-440b-9334-fc966a03a0f6/4.mp3?v=1735282737480",
-          5: "https://cdn.glitch.global/adde49db-4a61-440b-9334-fc966a03a0f6/5.mp3?v=1735282738528",
-          6: "https://cdn.glitch.global/adde49db-4a61-440b-9334-fc966a03a0f6/6.mp3?v=1735282739402",
-          7: "https://cdn.glitch.global/adde49db-4a61-440b-9334-fc966a03a0f6/7.mp3?v=1735282742326",
-          8: "https://cdn.glitch.global/adde49db-4a61-440b-9334-fc966a03a0f6/8.mp3?v=1735282742875",
-          9: "https://cdn.glitch.global/adde49db-4a61-440b-9334-fc966a03a0f6/9.mp3?v=1735282744403",
-          10: "https://cdn.glitch.global/adde49db-4a61-440b-9334-fc966a03a0f6/10.mp3?v=1735282753727",
-          11: "https://cdn.glitch.global/adde49db-4a61-440b-9334-fc966a03a0f6/11.mp3?v=1735282801507",
-          12: "https://cdn.glitch.global/adde49db-4a61-440b-9334-fc966a03a0f6/12.mp3?v=1735282755863",
-          13: "https://cdn.glitch.global/adde49db-4a61-440b-9334-fc966a03a0f6/13.mp3?v=1735282805825",
-          14: "https://cdn.glitch.global/adde49db-4a61-440b-9334-fc966a03a0f6/14.mp3?v=1735282806371",
-          15: "https://cdn.glitch.global/adde49db-4a61-440b-9334-fc966a03a0f6/15.mp3?v=1735282807613",
-          16: "https://cdn.glitch.global/adde49db-4a61-440b-9334-fc966a03a0f6/16.mp3?v=1735282807345",
-          17: "https://cdn.glitch.global/adde49db-4a61-440b-9334-fc966a03a0f6/17.mp3?v=1735282818130",
-          18: "https://cdn.glitch.global/adde49db-4a61-440b-9334-fc966a03a0f6/18.mp3?v=1735282819168",
-          19: "https://cdn.glitch.global/adde49db-4a61-440b-9334-fc966a03a0f6/19.mp3?v=1735282823892",
-          20: "https://cdn.glitch.global/adde49db-4a61-440b-9334-fc966a03a0f6/20.mp3?v=1735282826978",
-          21: "https://cdn.glitch.global/adde49db-4a61-440b-9334-fc966a03a0f6/21.mp3?v=1735282826841",
-          22: "https://cdn.glitch.global/adde49db-4a61-440b-9334-fc966a03a0f6/22.mp3?v=1735282829691",
-          23: "https://cdn.glitch.global/adde49db-4a61-440b-9334-fc966a03a0f6/23.mp3?v=1735282830715",
-          24: "https://cdn.glitch.global/adde49db-4a61-440b-9334-fc966a03a0f6/24.mp3?v=1735282831292",
-          25: "https://cdn.glitch.global/adde49db-4a61-440b-9334-fc966a03a0f6/25.mp3?v=1735282834099",
-          26: "https://cdn.glitch.global/adde49db-4a61-440b-9334-fc966a03a0f6/26.mp3?v=1735282834081",
-          27: "https://cdn.glitch.global/adde49db-4a61-440b-9334-fc966a03a0f6/27.mp3?v=1735282835706",
-          28: "https://cdn.glitch.global/adde49db-4a61-440b-9334-fc966a03a0f6/28.mp3?v=1735282837783",
-          29: "https://cdn.glitch.global/adde49db-4a61-440b-9334-fc966a03a0f6/29.mp3?v=1735282838364",
-          30: "https://cdn.glitch.global/adde49db-4a61-440b-9334-fc966a03a0f6/30.mp3?v=1735282839774",
-          31: "https://cdn.glitch.global/adde49db-4a61-440b-9334-fc966a03a0f6/31.mp3?v=1735282841586",
-          32: "https://cdn.glitch.global/adde49db-4a61-440b-9334-fc966a03a0f6/32.mp3?v=1735282842903",
-          33: "https://cdn.glitch.global/adde49db-4a61-440b-9334-fc966a03a0f6/33.mp3?v=1735282844263",
-          34: "https://cdn.glitch.global/adde49db-4a61-440b-9334-fc966a03a0f6/34.mp3?v=1735282845596",
-          35: "https://cdn.glitch.global/adde49db-4a61-440b-9334-fc966a03a0f6/35.mp3?v=1735282846567",
-          36: "https://cdn.glitch.global/adde49db-4a61-440b-9334-fc966a03a0f6/36.mp3?v=1735282848081",
-          37: "https://cdn.glitch.global/adde49db-4a61-440b-9334-fc966a03a0f6/37.mp3?v=1735282849525",
-          38: "https://cdn.glitch.global/adde49db-4a61-440b-9334-fc966a03a0f6/38.mp3?v=1735282851105",
-          39: "https://cdn.glitch.global/adde49db-4a61-440b-9334-fc966a03a0f6/39.mp3?v=1735282865662",
-          40: "https://cdn.glitch.global/adde49db-4a61-440b-9334-fc966a03a0f6/40.mp3?v=1735282866959",
-        };
-
-        // Get the audio URL for the given track
-        const audioSrc = audioLinks[track] || ""; // Default empty if no track
-
-        // Update the audio element source dynamically
-        const audioElement = document.getElementById("audio");
-        const audioEntity = document.getElementById("audio-entity");
-
-        if (audioSrc) {
-          audioElement.src = audioSrc;
-          audioEntity.setAttribute("sound", `src: #audio`);
-        }
-
-        // Play/pause audio based on target detection
-        const target = document.querySelector("[mindar-image-target]");
-        target.addEventListener("targetFound", () => {
-          audioEntity.components.sound.playSound();
+    
+        
+        // Debugging: Add event listeners for MindAR
+        targetEntity.addEventListener("targetFound", () => {
+            console.log("Target found!");
+            videoEl.components.material.material.map.image.play(); // Ensure video plays
         });
-        target.addEventListener("targetLost", () => {
-          audioEntity.components.sound.pauseSound();
+
+        targetEntity.addEventListener("targetLost", () => {
+            console.log("Target lost!");
+            videoEl.components.material.material.map.image.pause();
+        });
+
+        sceneEl.addEventListener("loaded", () => {
+            console.log("AR scene loaded successfully.");
+        });
+    });
+
+
+        // Find the corresponding audio entity
+        const activeAudioEntity = document.getElementById(`audioEntity${target}`);
+
+
+        targetEntity.addEventListener("targetLost", () => {
+          console.log(`Target ${target} lost! Pausing audio...`);
+          if (activeAudioEntity) {
+            activeAudioEntity.components.sound.pauseSound();
+          }
+        });
+
+        // Unlock autoplay restrictions on first click
+        document.addEventListener("click", () => {
+          if (activeAudioEntity) {
+            activeAudioEntity.components.sound.playSound();
+          }
+          overlay.style.display = "none"; // Hide overlay
         });
       });
     </script>
