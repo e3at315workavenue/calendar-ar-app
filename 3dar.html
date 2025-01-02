@@ -1,25 +1,126 @@
-
+<!DOCTYPE html>
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v7.0.0/dist/aframe-extras.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
+    <style>
+      body {
+        margin: 0;
+        overflow: hidden;
+      }
+    </style>
   </head>
   <body>
-    <a-scene mindar-image="imageTargetSrc: ./targets.mind; showStats: true;" color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
+    <!-- Instruction message -->
+    <div id="instructions" style="
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 18px;
+      color: white;
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 10px 20px;
+      border-radius: 5px;
+      z-index: 2;
+      text-align: center;
+    ">
+      Turn up the volume to enhance your experience.
+    </div>
+
+    <a-scene
+      id="ar-scene"
+      mindar-image="imageTargetSrc: https://cdn.glitch.global/adde49db-4a61-440b-9334-fc966a03a0f6/targets%20(7).mind?v=1735283569954; filterMinCF: 0.2; filterBeta: 15; warmupTolerance: 5; missTolerance: 5"
+      color-space="sRGB"
+      renderer="colorManagement: true; physicallyCorrectLights"
+      vr-mode-ui="enabled: false"
+      device-orientation-permission-ui="enabled: false"
+    >
+      <!-- Preload assets -->
       <a-assets>
-        <img id="card" src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.2.5/examples/image-tracking/assets/card-example/card.png" />
-        <a-asset-item id="avatarModel" src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.2.5/examples/image-tracking/assets/card-example/softmind/scene.gltf"></a-asset-item>
+        <a-asset-item
+          id="robotModel"
+          src="https://cdn.glitch.global/adde49db-4a61-440b-9334-fc966a03a0f6/1.glb?v=1735824614546"
+        ></a-asset-item>
+        <audio id="audio1" src="https://cdn.glitch.global/adde49db-4a61-440b-9334-fc966a03a0f6/0.mp3?v=1735282717693" preload="auto" loop="false"></audio>
       </a-assets>
 
+      <!-- Camera -->
+      <a-camera position="0 1.6 3" look-controls="enabled: false"></a-camera>
 
-      <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
-
-
+      <!-- MindAR Target and Model -->
       <a-entity mindar-image-target="targetIndex: 0">
-        <a-plane src="#card" position="0 0 0" height="0.552" width="1" rotation="0 0 0"></a-plane>
-        <a-gltf-model rotation="0 0 0 " position="0 0 0.1" scale="0.005 0.005 0.005" src="#avatarModel" animation="property: position; to: 0 0.1 0.1; dur: 1000; easing: easeInOutQuad; loop: true; dir: alternate"> </a-gltf-model>
+        <a-gltf-model
+          id="robotModelEntity"
+          rotation="90 0 0"
+          position="0 0 0"
+          scale="0.2 0.2 0.2"
+          src="#robotModel"
+          animation-mixer
+        ></a-gltf-model>
+
+        <!-- Audio Entity -->
+        <a-entity
+          id="audio-entity"
+          sound="loop: false; src: #audio1"
+        ></a-entity>
       </a-entity>
+
+      <!-- Plane Detection (for WebXR devices only) -->
+      <a-entity id="plane-detector" visible="false"></a-entity>
     </a-scene>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const sceneEl = document.getElementById("ar-scene");
+        const planeDetector = document.getElementById("plane-detector");
+        const instructions = document.getElementById("instructions");
+
+        if (navigator.xr && navigator.xr.requestSession) {
+          navigator.xr
+            .isSessionSupported("immersive-ar")
+            .then((supported) => {
+              if (supported) {
+                console.log("WebXR plane detection enabled.");
+                instructions.textContent += " Plane detection is active.";
+
+                // Enable plane detection
+                planeDetector.setAttribute("visible", true);
+                planeDetector.setAttribute("geometry", "primitive: plane; width: 2; height: 2");
+                planeDetector.setAttribute("material", "color: green; opacity: 0.5");
+              } else {
+                console.warn("WebXR is supported but no plane detection available.");
+              }
+            })
+            .catch((err) => {
+              console.error("Error checking WebXR support:", err);
+            });
+        } else {
+          console.warn("WebXR not supported. Running fallback.");
+          instructions.textContent += " Running fallback version.";
+          // Ensure plane detector remains hidden
+          planeDetector.setAttribute("visible", false);
+        }
+
+        // Audio sync and model handling logic
+        const audioElement = document.getElementById("audio1");
+        const audioEntity = document.getElementById("audio-entity");
+        const robotModelEntity = document.getElementById("robotModelEntity");
+        const target = document.querySelector("[mindar-image-target]");
+
+        audioElement.muted = true;
+
+        target.addEventListener("targetFound", () => {
+          audioElement.muted = false;
+          audioEntity.components.sound.playSound();
+        });
+
+        target.addEventListener("targetLost", () => {
+          audioEntity.components.sound.stopSound();
+        });
+      });
+    </script>
   </body>
 </html>
