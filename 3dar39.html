@@ -116,6 +116,11 @@
           // Stop and pause the audio when target is lost
 audioEntity.components.sound.pauseSound(); // Pause audio
 
+          setInterval(() => {
+    console.log("Model Position:", robotModelEntity.object3D.position);
+    console.log("Model Rotation:", robotModelEntity.object3D.rotation);
+}, 1000);
+
         });
       });
     </script>
