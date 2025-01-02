@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v7.0.0/dist/aframe-extras.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
+    <style>
+      body {
+        margin: 0;
+        overflow: hidden;
+      }
+    </style>
+  </head>
+  <body>
+    <a-scene
+      mindar-image="imageTargetSrc: https://cdn.glitch.global/adde49db-4a61-440b-9334-fc966a03a0f6/targets%20(7).mind?v=1735283569954;"
+      color-space="sRGB"
+      renderer="colorManagement: true, physicallyCorrectLights"
+      vr-mode-ui="enabled: false"
+      device-orientation-permission-ui="enabled: false"
+    >
+      <!-- Preload assets -->
+      <a-assets>
+        <a-asset-item
+          id="robotModel"
+          src="https://cdn.glitch.global/adde49db-4a61-440b-9334-fc966a03a0f6/Robot.glb?v=1735325921750"
+        ></a-asset-item>
+        <!-- Preload audio files -->
+        <audio id="audio1" src="https://cdn.glitch.global/adde49db-4a61-440b-9334-fc966a03a0f6/0.mp3?v=1735282717693" preload="auto" loop="false"></audio>
+      </a-assets>
+
+      <!-- Camera -->
+      <a-camera position="0 1.6 3" look-controls="enabled: false"></a-camera>
+
+      <!-- MindAR Target and Model -->
+      <a-entity mindar-image-target="targetIndex: 0">
+        <a-gltf-model
+          id="robotModelEntity"
+          rotation="90 0 0"
+          position="0 0 0"
+          scale="0.2 0.2 0.2"
+          src="#robotModel"
+          animation-mixer
+        ></a-gltf-model>
+
+        <!-- Audio Entity (No autoplay) -->
+        <a-entity
+          id="audio-entity"
+          sound="loop: false; src: #audio1"
+        ></a-entity>
+      </a-entity>
+    </a-scene>
+
+    <script>
+      // Sync function for audio and model viewer animation
+      function Sync(modelSelector, audioSelector) {
+        var sound = document.querySelector(audioSelector);
+        var modelViewer = document.querySelector(modelSelector);
+        if (modelViewer && sound) {
+          sound.addEventListener("timeupdate", () => {
+            if (sound.currentTime > modelViewer.duration) {
+              // restart both model and sound
+              modelViewer.currentTime = 0;
+              sound.currentTime = 0;
+            } else {
+              modelViewer.currentTime = sound.currentTime;
+            }
+          });
+        }
+
+        modelViewer.setAttribute("camera-controls", true);
+        modelViewer.setAttribute("auto-rotate", true);
+        modelViewer.setAttribute("autoplay", true);
+        sound.play();
+        modelViewer.play();
+      }
+
+      document.addEventListener("DOMContentLoaded", function () {
+        const audioElement = document.getElementById("audio1");
+        const audioEntity = document.getElementById("audio-entity");
+        const robotModelEntity = document.getElementById("robotModelEntity");
+
+        // Initially mute the audio
+        audioElement.muted = true; // Start muted
+
+        // Play audio when target is detected
+        const target = document.querySelector("[mindar-image-target]");
+
+        target.addEventListener("targetFound", () => {
+          audioElement.muted = false; // Unmute audio
+          audioEntity.components.sound.playSound(); // Start audio when target is found
+
+          // Sync model animation with audio
+          Sync("#robotModelEntity", "#audio1");
+        });
+
+        target.addEventListener("targetLost", () => {
+          // Stop and pause the audio when target is lost
+audioEntity.components.sound.pauseSound();
+
+        });
+      });
+    </script>
+  </body>
+</html>
