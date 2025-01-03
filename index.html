@@ -70,7 +70,13 @@
       <p>Your browser does not support AR. Please try updating your browser or using a compatible device.</p>
       <button onclick="window.location.reload()">Retry</button>
     </div>
-    <a-scene mindar-image="imageTargetSrc: https://cdn.glitch.global/47cb3597-937e-4975-9047-af4b82a887a7/targets%20(3).mind?v=1734189826382;" filterMinCF: 0.2; filterBeta: 15; warmupTolerance: 5; missTolerance: 5; color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
+<a-scene 
+  mindar-image="imageTargetSrc: https://cdn.glitch.global/47cb3597-937e-4975-9047-af4b82a887a7/targets%20(3).mind?v=1734189826382; filterMinCF: 0.2; filterBeta: 15; warmupTolerance: 5; missTolerance: 5;" 
+  color-space="sRGB" 
+  renderer="colorManagement: true, physicallyCorrectLights" 
+  vr-mode-ui="enabled: false" 
+  device-orientation-permission-ui="enabled: false">
+</a-scene>
       <a-assets>
         <!-- Preloading video assets -->
         <video id="0" src="https://cdn.glitch.global/47cb3597-937e-4975-9047-af4b82a887a7/0.mp4?v=1734351300566" loop muted crossorigin="anonymous"></video>
@@ -85,15 +91,6 @@
         <video id="9" src="https://cdn.glitch.global/47cb3597-937e-4975-9047-af4b82a887a7/9.mp4?v=1734351364072" loop muted crossorigin="anonymous"></video>
         <video id="10" src="https://cdn.glitch.global/47cb3597-937e-4975-9047-af4b82a887a7/10.mp4?v=1734351370840" loop muted crossorigin="anonymous"></video>
         <video id="11" src="https://cdn.glitch.global/47cb3597-937e-4975-9047-af4b82a887a7/11.mp4?v=1734351373819" loop muted crossorigin="anonymous"></video>
-        
-        <!-- Add more videos as needed -->
-
-        <!-- Preloading images -->
-        <img id="icon1" src="https://cdn.glitch.global/47cb3597-937e-4975-9047-af4b82a887a7/logo-placeholder-image-6-1024x1024.png?v=1734184300693" />
-        <img id="icon2" src="https://cdn.glitch.global/47cb3597-937e-4975-9047-af4b82a887a7/logo-placeholder-image-6-1024x1024.png?v=1734184300693" />
-        <img id="icon3" src="https://cdn.glitch.global/47cb3597-937e-4975-9047-af4b82a887a7/logo-placeholder-image-6-1024x1024.png?v=1734184300693" />
-        <img id="icon4" src="https://cdn.glitch.global/47cb3597-937e-4975-9047-af4b82a887a7/logo-placeholder-image-6-1024x1024.png?v=1734184300693" />
-      </a-assets>
 
       <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
 
