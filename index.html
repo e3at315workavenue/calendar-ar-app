@@ -63,6 +63,17 @@
       <p>Your browser does not support AR. Please try updating your browser or using a compatible device.</p>
       <button onclick="window.location.reload()">Retry</button>
     </div>
+     /* Watermark styles */
+      .watermark {
+        position: fixed;
+        bottom: 10px;
+        right: 10px;
+        font-size: 12px;
+        color: rgba(255, 255, 255, 0.6);
+        font-family: Arial, sans-serif;
+        z-index: 2;
+        pointer-events: none; /* Ensure it doesn't interfere with interactions */
+      }
 
     <a-scene mindar-image="imageTargetSrc: https://cdn.glitch.global/47cb3597-937e-4975-9047-af4b82a887a7/targets%20(3).mind?v=1734189826382;" color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
       <a-assets>
@@ -121,7 +132,8 @@
         <a-video src="#11" position="0 0 0" scale="1 0.5 1" rotation="0 0 0"></a-video>
       </a-entity>
     </a-scene>
-
+<!-- Watermark -->
+    <div class="watermark">Made by Designman™</div>
     <script>
       document.querySelector('a-scene').addEventListener('loaded', () => {
         const mindarImage = document.querySelector('[mindar-image]');
