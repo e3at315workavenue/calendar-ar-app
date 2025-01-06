@@ -1,108 +1,5 @@
 <html>
   <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-QDL29PSKNT"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-QDL29PSKNT');
-</script>
-    
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
-    <style>  
-      #overlay {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.7);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: white;
-        font-size: 18px;
-        z-index: 9999;
-      }
-      #fallback {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.9);
-        color: white;
-        font-size: 18px;
-        display: none;
-        justify-content: center;
-        align-items: center;
-        z-index: 9999;
-        flex-direction: column;
-      }
-      #fallback button {
-        margin-top: 20px;
-        padding: 10px 20px;
-        background-color: #007bff;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-      }
-</style>
-  </head>
-  <body>
-     <!-- Overlay Message -->
-    <div id="overlay">Tap anywhere to start AR</div>
-
-    <!-- Fallback UI -->
-    <div id="fallback">
-      <p>Your browser does not support AR. Please try updating your browser or using a compatible device.</p>
-      <button onclick="window.location.reload()">Retry</button>
-    </div>
-    <a-scene mindar-image="imageTargetSrc: https://cdn.glitch.global/47cb3597-937e-4975-9047-af4b82a887a7/targets%20(3).mind?v=1734189826382;" color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
-      <a-assets>
-        <!-- Preloading video assets -->
-        <video id="0" src="https://cdn.glitch.global/47cb3597-937e-4975-9047-af4b82a887a7/0.mp4?v=1734351300566" loop muted crossorigin="anonymous"></video>
-        <video id="1" src="https://cdn.glitch.global/47cb3597-937e-4975-9047-af4b82a887a7/1.mp4?v=1734351338344" loop muted crossorigin="anonymous"></video>
-        <video id="2" src="https://cdn.glitch.global/47cb3597-937e-4975-9047-af4b82a887a7/2.mp4?v=1734351317863" loop muted crossorigin="anonymous"></video>
-        <video id="3" src="https://cdn.glitch.global/47cb3597-937e-4975-9047-af4b82a887a7/3.mp4?v=1734351301918" loop muted crossorigin="anonymous"></video>
-        <video id="4" src="https://cdn.glitch.global/47cb3597-937e-4975-9047-af4b82a887a7/4.mp4?v=1734351355232" loop muted crossorigin="anonymous"></video>
-        <video id="5" src="https://cdn.glitch.global/47cb3597-937e-4975-9047-af4b82a887a7/5.mp4?v=1734351352641" loop muted crossorigin="anonymous"></video>
-        <video id="6" src="https://cdn.glitch.global/47cb3597-937e-4975-9047-af4b82a887a7/6.mp4?v=1734351392879" loop muted crossorigin="anonymous"></video>
-        <video id="7" src="https://cdn.glitch.global/47cb3597-937e-4975-9047-af4b82a887a7/7.mp4?v=1734351357884" loop muted crossorigin="anonymous"></video>
-        <video id="8" src="https://cdn.glitch.global/47cb3597-937e-4975-9047-af4b82a887a7/8.mp4?v=1734351361677" loop muted crossorigin="anonymous"></video>
-        <video id="9" src="https://cdn.glitch.global/47cb3597-937e-4975-9047-af4b82a887a7/9.mp4?v=1734351364072" loop muted crossorigin="anonymous"></video>
-        <video id="10" src="https://cdn.glitch.global/47cb3597-937e-4975-9047-af4b82a887a7/10.mp4?v=1734351370840" loop muted crossorigin="anonymous"></video>
-        <video id="11" src="https://cdn.glitch.global/47cb3597-937e-4975-9047-af4b82a887a7/11.mp4?v=1734351373819" loop muted crossorigin="anonymous"></video>
-      
-      </a-assets>
-
-      <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
-
-      <!-- Define video entities dynamically -->
-    <a-entity mindar-image-target="targetIndex: 0">
-  <a-video src="#0" position="0 0 0" scale="1 0.5 1" rotation="0 0 0"></a-video>
-</a-entity>
-<a-entity mindar-image-target="targetIndex: 1">
-  <a-video src="#1" position="0 0 0" scale="1 0.5 1" rotation="0 0 0"></a-video>
-</a-entity>
-<a-entity mindar-image-target="targetIndex: 2">
-  <a-video src="#2" position="0 0 0" scale="1 0.5 1" rotation="0 0 0"></a-video>
-</a-entity>
-<a-entity mindar-image-target="targetIndex: 3">
-  <a-video src="#3" position="0 0 0" scale="1 0.5 1" rotation="0 0 0"></a-video>
-</a-entity>
-<a-entity mindar-image-target="targetIndex: 4">
-  <a-video src="#4" position="0 0 0" scale="1 0.5 1" rotation="0 0 0"></a-video>
-</a-entity>
-<a-entity mindar-image-target="targetIndex: 5">
-  <a-video src="#5" position="0 0 0" scale="1 0.5 1" rotation="0 0 0"></a-video>
-</a-ent<html>
-  <head>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-QDL29PSKNT"></script>
     <script>
@@ -154,19 +51,6 @@
         border: none;
         border-radius: 5px;
         cursor: pointer;
-      }
-      .watermark {
-        position: fixed;
-        bottom: 10px;
-        right: 10px;
-        font-size: 12px;
-        color: white;
-        opacity: 0.7;
-        z-index: 9999;
-        font-family: Arial, sans-serif;
-        background-color: rgba(0, 0, 0, 0.5);
-        padding: 5px 10px;
-        border-radius: 5px;
       }
     </style>
   </head>
@@ -236,106 +120,90 @@
       <a-entity mindar-image-target="targetIndex: 11">
         <a-video src="#11" position="0 0 0" scale="1 0.5 1" rotation="0 0 0"></a-video>
       </a-entity>
+    </a-scene>
 
-      <script>
-        document.querySelector('a-scene').addEventListener('loaded', () => {
-          const mindarImage = document.querySelector('[mindar-image]');
-          mindarImage.setAttribute(
-            'mindar-image',
-            `imageTargetSrc: https://cdn.glitch.global/47cb3597-937e-4975-9047-af4b82a887a7/targets%20(3).mind?v=1734189826382; 
-            filterMinCF: 1000; 
-            filterBeta: 30; 
-            warmupTolerance: 5; 
-            missTolerance: 5;`
-          );
+    <script>
+      document.querySelector('a-scene').addEventListener('loaded', () => {
+        const mindarImage = document.querySelector('[mindar-image]');
+        mindarImage.setAttribute(
+          'mindar-image', 
+          `imageTargetSrc: https://cdn.glitch.global/47cb3597-937e-4975-9047-af4b82a887a7/targets%20(3).mind?v=1734189826382; 
+          filterMinCF: 1000; 
+          filterBeta: 30; 
+          warmupTolerance: 5; 
+          missTolerance: 5;`
+        );
+      });
+
+      document.addEventListener('DOMContentLoaded', () => {
+        const videos = Array.from({ length: 12 }, (_, i) => document.getElementById(`${i}`));
+        const videoTargets = document.querySelectorAll('[mindar-image-target]');
+        let activeVideo = null;
+        let targetDetected = false;
+
+        videos.forEach((video) => {
+          video.pause();
+          video.muted = true;
         });
 
-        document.addEventListener('DOMContentLoaded', () => {
-          const videos = Array.from({ length: 12 }, (_, i) => document.getElementById(`${i}`));
-          const videoTargets = document.querySelectorAll('[mindar-image-target]');
-          let activeVideo = null; // Track the currently active video
-          let targetDetected = false; // Track if a target is detected
+        const pauseAllVideos = (excludeVideo = null) => {
+          videos.forEach((video) => {
+            if (video !== excludeVideo) {
+              video.pause();
+              video.currentTime = 0;
+              video.muted = true;
+            }
+          });
+        };
 
-    // Ensure all videos are paused, muted, and reset initially
-    videos.forEach((video) => {
-      video.pause();
-      video.muted = true; // Start all videos muted
-    });
+        const playActiveVideo = () => {
+          if (targetDetected && activeVideo) {
+            activeVideo.muted = false;
+            activeVideo.play();
+            document.getElementById('overlay').style.display = 'none';
+            targetDetected = false;
+          }
+        };
 
-    // Function to pause all videos except the active one
-    const pauseAllVideos = (excludeVideo = null) => {
-      videos.forEach((video) => {
-        if (video !== excludeVideo) {
-          video.pause();
-          video.currentTime = 0; // Reset video if not active
-          video.muted = true;
-        }
+        videoTargets.forEach((target, index) => {
+          const video = videos[index];
+
+          target.addEventListener('targetFound', () => {
+            if (activeVideo !== video) {
+              pauseAllVideos(video);
+              activeVideo = video;
+            }
+            targetDetected = true;
+
+            if (!video.paused) {
+              video.play();
+              document.getElementById('overlay').style.display = 'none';
+              return;
+            }
+
+            document.getElementById('overlay').style.display = 'flex';
+          });
+
+          target.addEventListener('targetLost', () => {
+            video.pause();
+            activeVideo = null;
+            targetDetected = false;
+            document.getElementById('overlay').style.display = 'none';
+          });
+        });
+
+        document.addEventListener('click', playActiveVideo);
+
+        const scene = document.querySelector('a-scene');
+
+        scene.addEventListener('loaded', () => {
+          document.getElementById('overlay').innerText = 'Tap anywhere to start the video';
+        });
+
+        scene.addEventListener('mindar-scanner-loaded', () => {
+          console.log('MindAR scanner loaded.');
+        });
       });
-    };
-
-    // Function to play the active video
-    const playActiveVideo = () => {
-      if (targetDetected && activeVideo) {
-        activeVideo.muted = false; // Unmute video
-        activeVideo.play(); // Play video from current time
-        console.log('Playing video with audio after user tap.');
-        document.getElementById('overlay').style.display = 'none'; // Hide overlay
-        targetDetected = false;
-      }
-    };
-  
-    // Handle target detection
-    videoTargets.forEach((target, index) => {
-      const video = videos[index];
-
-      target.addEventListener('targetFound', () => {
-        console.log(`Target ${index} detected!`);
-        if (activeVideo !== video) {
-          pauseAllVideos(video); // Pause other videos
-          activeVideo = video; // Set the current video
-        }
-        targetDetected = true; // Set detection flag
-
-        // Play immediately if video was already playing
-        if (!video.paused) {
-          console.log(`Resuming video for target ${index}...`);
-          video.play(); // Resume video
-          document.getElementById('overlay').style.display = 'none'; // Hide prompt
-          return;
-        }
-
-        // Otherwise, wait for user tap if first time
-        document.getElementById('overlay').style.display = 'flex';
-        console.log(`Waiting for user tap to play video for target ${index}`);
-      });
-
-      target.addEventListener('targetLost', () => {
-        console.log(`Target ${index} lost! Pausing video...`);
-        video.pause(); // Pause video but don't reset time
-        activeVideo = null; // Clear active video
-        targetDetected = false;
-        document.getElementById('overlay').style.display = 'none'; // Hide tap prompt
-      });
-    });
-
-    // Listen for user tap to play the video
-    document.addEventListener('click', playActiveVideo);
-
-    // Show overlay text after AR scene is loaded
-    const scene = document.querySelector('a-scene');
-
-    scene.addEventListener('loaded', () => {
-      console.log('AR scene loaded.');
-      document.getElementById('overlay').innerText = 'Tap anywhere to start the video';
-    });
-
-    // MindAR scanner ready event
-    scene.addEventListener('mindar-scanner-loaded', () => {
-      console.log('MindAR scanner loaded.');
-    });
-  });
-</script>
-
-    </a-scene>
+    </script>
   </body>
 </html>
