@@ -29,20 +29,7 @@
     <!-- Instruction message -->
     <div
       id="instructions"
-      style="
-        position: absolute;
-        top: 20px;
-        left: 50%;
-        transform: translateX(-50%);
-        font-size: 18px;
-        color: white;
-        background-color: rgba(0, 0, 0, 0.7);
-        padding: 10px 20px;
-        border-radius: 5px;
-        z-index: 2;
-        text-align: center;
-      "
-    >
+      style="position: absolute; top: 20px; left: 50%; transform: translateX(-50%); font-size: 18px; color: white; background-color: rgba(0, 0, 0, 0.7); padding: 10px 20px; border-radius: 5px; z-index: 2; text-align: center;">
       Turn up the volume to enhance your experience.
     </div>
 
@@ -67,7 +54,7 @@
           id="audio1"
           src="https://cdn.glitch.global/adde49db-4a61-440b-9334-fc966a03a0f6/1.mp3?v=1735282707765"
           preload="auto"
-          loop="false"
+          loop="false"  <!-- Explicitly turn off audio loop -->
         ></audio>
       </a-assets>
 
@@ -86,7 +73,7 @@
         ></a-gltf-model>
 
         <!-- Audio Entity (No autoplay) -->
-        <a-entity id="audio-entity" sound="loop: false; src: #audio1"></a-entity>
+        <a-entity id="audio-entity" sound="loop: false; src: #audio1"></a-entity> <!-- Ensure no loop -->
       </a-entity>
     </a-scene>
 
