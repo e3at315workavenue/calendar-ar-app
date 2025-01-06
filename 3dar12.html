@@ -10,27 +10,47 @@
         margin: 0;
         overflow: hidden;
       }
+
+      /* Watermark styles */
+      #watermark {
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+        font-size: 14px;
+        color: rgba(255, 255, 255, 0.7);
+        background-color: rgba(0, 0, 0, 0.5);
+        padding: 5px 10px;
+        border-radius: 5px;
+        z-index: 2;
+      }
     </style>
   </head>
   <body>
     <!-- Instruction message -->
-    <div id="instructions" style="
-      position: absolute;
-      top: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      font-size: 18px;
-      color: white;
-      background-color: rgba(0, 0, 0, 0.7);
-      padding: 10px 20px;
-      border-radius: 5px;
-      z-index: 2;
-      text-align: center;
-    ">
-  Turn up the volume to enhance your experience.
-</div>
+    <div
+      id="instructions"
+      style="
+        position: absolute;
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 18px;
+        color: white;
+        background-color: rgba(0, 0, 0, 0.7);
+        padding: 10px 20px;
+        border-radius: 5px;
+        z-index: 2;
+        text-align: center;
+      "
+    >
+      Turn up the volume to enhance your experience.
+    </div>
+
+    <!-- Watermark -->
+    <div id="watermark">Made by Designman™</div>
+
     <a-scene
-      mindar-image="imageTargetSrc: https://cdn.glitch.global/adde49db-4a61-440b-9334-fc966a03a0f6/targets%20(7).mind?v=1735283569954; filterMinCF: .2; filterBeta: 15; warmupTolerance: 5; missTolerance: 5"
+      mindar-image="imageTargetSrc: https://cdn.glitch.global/adde49db-4a61-440b-9334-fc966a03a0f6/targets%20(7).mind?v=1735283569954; filterMinCF: 0.0001; filterBeta: 0.001; warmupTolerance: 5; missTolerance: 10"
       color-space="sRGB"
       renderer="colorManagement: true, physicallyCorrectLights"
       vr-mode-ui="enabled: false"
@@ -43,7 +63,12 @@
           src="https://cdn.glitch.global/adde49db-4a61-440b-9334-fc966a03a0f6/3.glb?v=1736142972694"
         ></a-asset-item>
         <!-- Preload audio files -->
-        <audio id="audio1" src="https://github.com/e3at315workavenue/calendar-ar-app/blob/main/12.mp3" preload="auto" loop="false"></audio>
+        <audio
+          id="audio1"
+          src="https://cdn.glitch.global/5f1ee1d9-9ea3-4949-ad40-b5a2aa33f357/12.mp3?v=1736187111301"
+          preload="auto"
+          loop="false"
+        ></audio>
       </a-assets>
 
       <!-- Camera -->
@@ -61,10 +86,7 @@
         ></a-gltf-model>
 
         <!-- Audio Entity (No autoplay) -->
-        <a-entity
-          id="audio-entity"
-          sound="loop: false; src: #audio1"
-        ></a-entity>
+        <a-entity id="audio-entity" sound="loop: false; src: #audio1"></a-entity>
       </a-entity>
     </a-scene>
 
@@ -113,7 +135,9 @@
 
         target.addEventListener("targetLost", () => {
           // Stop and pause the audio when target is lost
-          audioEntity.components.sound.pauseSound(); // Pause audio
+          if (audioEntity.components.sound.isPlaying) {
+            audioEntity.components.sound.pauseSound();
+          }
         });
       });
     </script>
