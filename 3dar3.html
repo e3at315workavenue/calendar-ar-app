@@ -14,21 +14,22 @@
   </head>
   <body>
     <!-- Instruction message -->
-<div id="instructions" style="
-  position: absolute;
-  top: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 18px;
-  color: white;
-  background-color: rgba(0, 0, 0, 0.7);
-  padding: 10px 20px;
-  border-radius: 5px;
-  z-index: 2;
-  text-align: center;
-">
-  Turn up the volume to enhance your experience.
-</div>
+    <div id="instructions" style="
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 18px;
+      color: white;
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 10px 20px;
+      border-radius: 5px;
+      z-index: 2;
+      text-align: center;
+    ">
+      Turn up the volume to enhance your experience.
+    </div>
+
     <a-scene
       mindar-image="imageTargetSrc: https://cdn.glitch.global/adde49db-4a61-440b-9334-fc966a03a0f6/targets%20(7).mind?v=1735283569954; filterMinCF: .2; filterBeta: 15; warmupTolerance: 5; missTolerance: 5"
       color-space="sRGB"
@@ -40,10 +41,10 @@
       <a-assets>
         <a-asset-item
           id="robotModel"
-          src="https://cdn.glitch.global/adde49db-4a61-440b-9334-fc966a03a0f6/1.glb?v=1735824614546"
+          src="https://cdn.glitch.me/adde49db-4a61-440b-9334-fc966a03a0f6/4546.glb?v=1736241789539"
         ></a-asset-item>
         <!-- Preload audio files -->
-        <audio id="audio1" src="https://cdn.glitch.global/adde49db-4a61-440b-9334-fc966a03a0f6/3.mp3?v=1735282721727" preload="auto" loop="false"></audio>
+        <audio id="audio1" src="https://cdn.glitch.global/5f1ee1d9-9ea3-4949-ad40-b5a2aa33f357/3.mp3?v=1736187103722" preload="auto" loop="false"></audio>
       </a-assets>
 
       <!-- Camera -->
@@ -55,7 +56,7 @@
           id="robotModelEntity"
           rotation="90 0 0"
           position="0 0 0"
-          scale="0.2 0.2 0.2"
+          scale="0.01 0.01 0.01"
           src="#robotModel"
           animation-mixer
         ></a-gltf-model>
@@ -113,8 +114,7 @@
 
         target.addEventListener("targetLost", () => {
           // Stop and pause the audio when target is lost
-audioEntity.components.sound.pauseSound();
-
+          audioEntity.components.sound.pauseSound();
         });
       });
     </script>
