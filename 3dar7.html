@@ -10,26 +10,13 @@
         margin: 0;
         overflow: hidden;
       }
-
-      /* Watermark styles */
-      #watermark {
-        position: absolute;
-        bottom: 10px;
-        right: 10px;
-        font-size: 14px;
-        color: rgba(255, 255, 255, 0.7);
-        background-color: rgba(0, 0, 0, 0.5);
-        padding: 5px 10px;
-        border-radius: 5px;
-        z-index: 2;
-      }
     </style>
   </head>
   <body>
     <!-- Instruction message -->
     <div
       id="instructions"
-      style="
+      style=" 
         position: absolute;
         top: 20px;
         left: 50%;
@@ -46,9 +33,6 @@
       Turn up the volume to enhance your experience.
     </div>
 
-    <!-- Watermark -->
-    <div id="watermark">Made by Designman™</div>
-
     <a-scene
       mindar-image="imageTargetSrc: https://cdn.glitch.global/adde49db-4a61-440b-9334-fc966a03a0f6/targets%20(7).mind?v=1735283569954; filterMinCF: 0.0001; filterBeta: 0.001; warmupTolerance: 5; missTolerance: 10"
       color-space="sRGB"
@@ -60,7 +44,7 @@
       <a-assets>
         <a-asset-item
           id="robotModel"
-          src="https://cdn.glitch.global/adde49db-4a61-440b-9334-fc966a03a0f6/3.glb?v=1736142972694"
+          src="https://cdn.glitch.me/adde49db-4a61-440b-9334-fc966a03a0f6/4546.glb?v=1736241789539"
         ></a-asset-item>
         <!-- Preload audio files -->
         <audio
@@ -80,7 +64,7 @@
           id="robotModelEntity"
           rotation="90 0 0"
           position="0 0 0"
-          scale="3 3 3"
+          scale="0.01 0.01 0.01" <!-- Updated scale -->
           src="#robotModel"
           animation-mixer
         ></a-gltf-model>
