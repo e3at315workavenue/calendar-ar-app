@@ -44,12 +44,12 @@
       <a-assets>
         <a-asset-item
           id="robotModel"
-          src="https://cdn.glitch.me/5f1ee1d9-9ea3-4949-ad40-b5a2aa33f357/80.glb?v=1736274793855" <!-- Updated model source -->
+          src="https://cdn.glitch.me/adde49db-4a61-440b-9334-fc966a03a0f6/4546.glb?v=1736241789539"
         ></a-asset-item>
         <!-- Preload audio files -->
         <audio
           id="audio1"
-          src="https://cdn.glitch.global/adde49db-4a61-440b-9334-fc966a03a0f6/36.mp3?v=1736271274281"
+          src="https://cdn.glitch.global/5f1ee1d9-9ea3-4949-ad40-b5a2aa33f357/35.mp3?v=1736187133350"
           preload="auto"
           loop="false"
         ></audio>
@@ -64,7 +64,7 @@
           id="robotModelEntity"
           rotation="90 0 0"
           position="0 0 0"
-          scale="0.01 0.01 0.01" <!-- Updated scale -->
+          scale="0.01 0.01 0.01"
           src="#robotModel"
           animation-mixer
         ></a-gltf-model>
@@ -77,12 +77,12 @@
     <script>
       // Sync function for audio and model viewer animation
       function Sync(modelSelector, audioSelector) {
-        var sound = document.querySelector(audioSelector);
-        var modelViewer = document.querySelector(modelSelector);
+        const sound = document.querySelector(audioSelector);
+        const modelViewer = document.querySelector(modelSelector);
         if (modelViewer && sound) {
           sound.addEventListener("timeupdate", () => {
             if (sound.currentTime > modelViewer.duration) {
-              // restart both model and sound
+              // Restart both model and sound
               modelViewer.currentTime = 0;
               sound.currentTime = 0;
             } else {
